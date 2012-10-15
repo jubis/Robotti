@@ -1,4 +1,17 @@
-Suunnittelemattomia metodeja:
+﻿Suunnittelemattomia metodeja:
 RobotinMaailma
+
 	public RobotinRuutu annaRuutu( Point sijainti, int suunta )
+		hakee tietorakenteesta oikean ruudun ja palauttaa sen
+		kannattaa hyödyntää oikean pisteen laskemiseen metodia annaNaapuri
+		
+	public Point annaNaapuri( Point keskipiste, int suunta )
+		palauttaa keskipisteestä katsottuna annetussa suunnassa olevan naapurin pisteen
+		
 	public void lisaaLaskuria( Point sijainti )
+		käyttää tallentaa tiedon laskarin lisämisestä oikeaan ruutuun
+		
+RobotinRuutu
+	
+	public int annaLaskurinArvo()
+		palauttaa ruudun laskurin arvon
