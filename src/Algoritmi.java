@@ -5,7 +5,8 @@ import java.util.Arrays;
 
 public class Algoritmi {
 	
-	/*Alla oleva on karkea hutaisu, jossa on tavoiteltu oikeaa ideaa mutta kaikki muu on melko väärin. 
+	/*Alla oleva on karkea hutaisu, jossa on tavoiteltu oikeaa ideaa 
+	* mutta kaikki muu on melko väärin. 
 	* Koodi olettaa että on olemassa RobotinMaailma.java, 
 	* jonne talletetaan ruudut joissa on käyty ja niiden tiedot.
 	*
@@ -90,25 +91,33 @@ public class Algoritmi {
 		//alla on for-lause joka käy kaikki ilmansuunnat l�pi ja tallettaa taulukkoon
 		for (aaa = 0; aaa < 4; aaa++) {
 	
-		if (robo.ruutu.eteneminenSuunnittain[aaa] = true) {
-		
-				if (RobotinMaailma.annaRuutu(/*suunnassa aaa*/) == null 
-						&& robo.ruutu.eteneminenSuunnittain[aaa] == true) {
+			if (robo.ruutu.eteneminenSuunnittain[aaa] = true) {
 			
-					//eli jos naapuria ei tunneta (eli siellä ei ole käyty) mutta sinne voi edetä, 
-					//sen laskurin katsotaan olevan 0 
-			
-					//johonkin tarvitaan metodi joka antaa RobonMaailmasta naapuriruudun suunnassa "aaa"
-					
-					naapurienLaskurit[aaa] = 0;
+					if (RobotinMaailma.annaRuutu(/*suunnassa aaa*/) == null 
+							&& robo.ruutu.eteneminenSuunnittain[aaa] == true) {
 				
-				}
-				else naapurienLaskurit[aaa] = RobotinMaailma.annaRuutu(/*suunnassa aaa*/).annaLaskurinArvo();
-				//muutoin kysytään RobonMaailmalta ruudun laskurin arvo
-		
+						//eli jos naapuria ei tunneta (eli siellä ei ole käyty) 
+						//mutta sinne voi edetä, sen laskurin katsotaan olevan 0 
+				
+						//johonkin tarvitaan metodi joka antaa RobonMaailmasta 
+						//naapuriruudun suunnassa "aaa"
+						
+						naapurienLaskurit[aaa] = 0;
+					
+					}
+					//muutoin kysytään RobonMaailmalta ruudun laskurin arvo
+					else {
+						naapurienLaskurit[aaa] = RobotinMaailma
+													.annaRuutu(/*suunnassa aaa*/)
+													.annaLaskurinArvo();
+					}
+						
+			
+			}
 		}
-		}
-		return naapurienLaskurit; //palautetaan taulukko, jossa indeksi (0-3) on ilmansuunta ja sen arvo on naapuriruudun laskurin arvo
+		//palautetaan taulukko, jossa indeksi (0-3) 
+		//on ilmansuunta ja sen arvo on naapuriruudun laskurin arvo
+		return naapurienLaskurit; 
 		}
 		
 	public int teeSuuntaPaatos() {
@@ -117,7 +126,14 @@ public class Algoritmi {
 		if (a) {
 		return a;}
 	int b = Arrays.binarySearch(naapurienLaskurit, 1);
-		//pulma: miten tarkastaa löytääkö binary mitään? int: lle kun ei voi tehdä true/false tarkastelua 
+		//pulma: miten tarkastaa löytääkö binary mitään? 
+		//int: lle kun ei voi tehdä true/false tarkastelua
+		/**
+		 * binäärihaku palauttaa negatiivisen luvun, jos se ei löytänyt mitään
+		 * jos se löysi, se palauttaa _muistaakseni_ ensimmäisen täsmäävän
+		 * alkion indeksin
+		 * kts. Java API
+		 */
 	}
 	
 	
