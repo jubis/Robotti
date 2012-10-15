@@ -8,7 +8,8 @@
 	- 
 Ruutu 
 	- 
-	
+
+	### Tässä nyt se varsinainen algoritmi tiivistettynä - saa täydentää ###
 Algoritmi
 	- attribuutti edellinenRuutu
 
@@ -23,6 +24,8 @@ Algoritmi
 			- jos umpikuja 
 				- palaa edelliseen risteykseenä
 
+	### (algoritmi loppuu)
+	
 RobotinAlgoritmi
 - boolean onkoRisteyksessa()
 	- jos etenemissuunnat >= 3
