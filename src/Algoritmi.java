@@ -14,7 +14,7 @@ public class Algoritmi {
 	 *ts. robotin päätöksentekoprosessi. -Johannes
 	 */ 
 
-	private Ruutu edellinenRuutu; 
+	private RobotinRuutu edellinenRuutu; 
 	//^ tämä voisi oikeastaan kuulua robotille. -Johannes
 
 	//robotissa tehdään esim. seuraava temppu: 
@@ -22,7 +22,7 @@ public class Algoritmi {
 	//nykyinenruutu = uusiruutu -Johannes
 
 
-	robo.ruutu.lisaaLaskuria();
+	robo.maailma.lisaaLaskuria( this.tamaRuutu );
 	//^ ruudulla (tai RobotinMaailmassa) on laskuri jota kasvatetaan aina kun
 	//ko. ruutuun mennään. Tämäkin rivi voi ehkä olla robotissa. -Johannes
 
