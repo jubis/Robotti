@@ -4,140 +4,142 @@
 import java.util.Arrays;
 
 public class Algoritmi {
-	
-	/*Alla oleva on karkea hutaisu, jossa on tavoiteltu oikeaa ideaa 
-	* mutta kaikki muu on melko väärin. 
-	* Koodi olettaa että on olemassa RobotinMaailma.java, 
-	* jonne talletetaan ruudut joissa on käyty ja niiden tiedot.
-	*
-	*tämä algoritmi on siis kaikki mitä tehdään ennen askelta
-	*ts. robotin päätöksentekoprosessi.
-	 */
+
+	/**Alla oleva koodi on vielä karkeahkoa.
+	 * 
+	 * Koodi olettaa että on olemassa RobotinMaailma.java, 
+	 * jonne talletetaan ruudut joissa on käyty ja niiden tiedot.
+	 *
+	 *tämä algoritmi on siis kaikki mitä tehdään ennen askelta
+	 *ts. robotin päätöksentekoprosessi. -Johannes
+	 */ 
 
 	private Ruutu edellinenRuutu; 
-	//^ tämä voisi oikeastaan kuulua robotille.
-	
+	//^ tämä voisi oikeastaan kuulua robotille. -Johannes
+
 	//robotissa tehdään esim. seuraava temppu: 
 	//edellinenruutu = nykyinenruutu
-	//nykyinenruutu = uusiruutu
-	
-	
+	//nykyinenruutu = uusiruutu -Johannes
+
+
 	robo.ruutu.lisaaLaskuria();
 	//^ ruudulla (tai RobotinMaailmassa) on laskuri jota kasvatetaan aina kun
-	//ko. ruutuun mennään. Tämäkin rivi voi ehkä olla robotissa.
+	//ko. ruutuun mennään. Tämäkin rivi voi ehkä olla robotissa. -Johannes
 
 	public void pyorahda() {
 		//Tämä metodi tutkii naapurustosta mihin suuntiin voi mennä.
-		
-		boolean voiEdetaPohjoiseen, 
-		voiEdetaItaan, voiEdetaEtelaan,
-		voiEdetaLanteen;
+
+		boolean[] eteneminenSuunnittain = new boolean[4]; 
+		//^tämä on oikeastaan ruudun ominaisuus, pitää ajallaan siirtää sinne -Johannes
 
 		for (int i = 0; i < 4; i++) {
-			boolean voikoEdeta = robo.annaSuunta().voiEdeta();
+
+			eteneminenSuunnittain[robo.annaSuunta()] = robo.voiEdeta();
 			robo.kaannyOikealle();	
 
-			boolean[] eteneminenSuunnittain = new boolean[4]; 
-			//^tämä taas on oikeastaan ruudun ominaisuus
-			
-			
 			/**
 			 * oisko tähän parempi suoraan 
 			 * ilman switch- tai if-lauseita pelkästään:
 			 * ###
 			 * eteneminenSunnittain[ robo.annaSuunta() ] = voikoEdeta();
-			 * ###
+			 * ### 
+			 * -Matias
 			 */
-			
-			
-			switch(robo.annaSuunta()) {
-			case 0 : { 
-				//eli case 0 tarkoittaa että robo katsoo pohjoiseen
 
-				if(voikoEdeta) {
-					eteneminenSuunnittain[0]= true;
-					
-				}
-				else eteneminenSuunnittain[0] = false;
-			}
-			case 1 : {
-				if(voikoEdeta) {
-					eteneminenSuunnittain[1]= true;
-				}
-				else eteneminenSuunnittain[1] = false;
-			}
-			case 2 : {
-				if(voikoEdeta) {
-					eteneminenSuunnittain[2]= true;
-				}
-				else eteneminenSuunnittain[2] = false;
-			}
-			case 3 : {
-				if(voikoEdeta) {
-					eteneminenSuunnittain[3]= true;
-				}
-				else eteneminenSuunnittain[3] = false;
-			}
-			}
-
+			/**
+			 * Poistin switchin, nyt aloittaa menosuunnasta ja käy 4 suuntaa läpi
+			 * -Johannes
+			 */
 		}
-	
-		public int[] tutkaile() {
+
+	}
+
+	public int[] tutkaile() {
+
 		int[] naapurienLaskurit = new int[4];
-		int aaa;
+		//^^tämäkin taulukko voisi olla Ruudussa. -Johannes
 		
-		
-		
-		//alla on for-lause joka käy kaikki ilmansuunnat l�pi ja tallettaa taulukkoon
-		for (aaa = 0; aaa < 4; aaa++) {
-	
-			if (robo.ruutu.eteneminenSuunnittain[aaa] = true) {
-			
-					if (RobotinMaailma.annaRuutu(/*suunnassa aaa*/) == null 
-							&& robo.ruutu.eteneminenSuunnittain[aaa] == true) {
-				
-						//eli jos naapuria ei tunneta (eli siellä ei ole käyty) 
-						//mutta sinne voi edetä, sen laskurin katsotaan olevan 0 
-				
-						//johonkin tarvitaan metodi joka antaa RobonMaailmasta 
-						//naapuriruudun suunnassa "aaa"
-						
-						naapurienLaskurit[aaa] = 0;
-					
-					}
-					//muutoin kysytään RobonMaailmalta ruudun laskurin arvo
-					else {
-						naapurienLaskurit[aaa] = RobotinMaailma
-													.annaRuutu(/*suunnassa aaa*/)
-													.annaLaskurinArvo();
-					}
-						
-			
+		int suunta;
+
+
+
+		//alla on for-lause joka käy kaikki ilmansuunnat läpi ja tallettaa taulukkoon
+		for (suunta = 0; suunta < 4; suunta++) {
+
+			if (robo.ruutu.eteneminenSuunnittain[suunta] = true) {
+
+				if (RobotinMaailma.annaRuutu(/*suunnassa aaa*/) == null 
+						&& robo.ruutu.eteneminenSuunnittain[suunta] == true) {
+
+					//eli jos naapuria ei tunneta (eli siellä ei ole käyty) 
+					//mutta sinne voi edetä, sen laskurin katsotaan olevan 0 
+
+					//johonkin tarvitaan metodi joka antaa RobonMaailmasta 
+					//naapuriruudun suunnassa "suunta"
+
+					naapurienLaskurit[suunta] = 0;
+
+				}
+				//muutoin kysytään RobonMaailmalta ruudun laskurin arvo
+				else {
+					naapurienLaskurit[suunta] = RobotinMaailma
+							.annaRuutu(/*suunnassa aaa*/)
+							.annaLaskurinArvo();
+				}
+
+
 			}
 		}
 		//palautetaan taulukko, jossa indeksi (0-3) 
 		//on ilmansuunta ja sen arvo on naapuriruudun laskurin arvo
 		return naapurienLaskurit; 
-		}
+	}
+
+
+	public boolean onkoRisteys() {
 		
+	}
+
+	/** luottolähteemme
+	 * 
+	http://www.astrolog.org/labyrnth/algrithm.htm
+	http://en.wikipedia.org/wiki/Maze_solving_algorithm
+	
+	kertovat, että risteykset vaativat erityiskohtelua, siksi ylläoleva metodi (vielä tyhjä).
+	-Johannes
+	*/
+	
 	public int teeSuuntaPaatos() {
+
 		int[] naapurienLaskurit = tutkaile();	
-	int a = Arrays.binarySearch(naapurienLaskurit, 0);
-		if (a) {
-		return a;}
-	int b = Arrays.binarySearch(naapurienLaskurit, 1);
-		//pulma: miten tarkastaa löytääkö binary mitään? 
-		//int: lle kun ei voi tehdä true/false tarkastelua
-		/**
+
+		int a = Arrays.binarySearch(naapurienLaskurit, 0);
+		if (a >= 0) {
+			return a;
+		}
+		int b = Arrays.binarySearch(naapurienLaskurit, 1);
+		if (b >= 0) {
+			return b;
+		}
+
+		/**	a on siis ensimmäinen suunta pohjoisesta myötäpäivään sellaiseen ruutuun, jossa käyty 0 kertaa
+		 *	b sellaiseen jossa käyty kerran
+		 *
+		 * tämä ei nyt vielä ota risteyslaskureita huomioon (saavat arvoja > 2)
+		/-Johannes
+	/**
 		 * binäärihaku palauttaa negatiivisen luvun, jos se ei löytänyt mitään
 		 * jos se löysi, se palauttaa _muistaakseni_ ensimmäisen täsmäävän
 		 * alkion indeksin
 		 * kts. Java API
+		 * -Matias
+		 * 
+		 * Muokattu - Johannes
 		 */
 	}
-	
-	
-	}
+
+
+
 	public static void main(String[] args) {
 
 
