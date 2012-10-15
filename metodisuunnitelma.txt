@@ -1,5 +1,6 @@
 ﻿Suunnittelemattomia metodeja:
 RobotinMaailma
+	Attribuutteihin jonkinlainen tietorakenne, johon ruudut talletetaan
 
 	public RobotinRuutu annaRuutu( Point sijainti, int suunta )
 		hakee tietorakenteesta oikean ruudun ja palauttaa sen
@@ -12,6 +13,8 @@ RobotinMaailma
 		käyttää tallentaa tiedon laskarin lisämisestä oikeaan ruutuun
 		
 RobotinRuutu
+	Attribuutteihin ainakin:
+		laskuri
 	
 	public int annaLaskurinArvo()
 		palauttaa ruudun laskurin arvon
