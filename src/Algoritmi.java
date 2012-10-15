@@ -5,28 +5,28 @@ import java.util.Arrays;
 
 public class Algoritmi {
 	
-	/*Alla oleva on karkea hutaisu, jossa on tavoiteltu oikeaa ideaa mutta kaikki muu on melko v‰‰rin. 
-	* Koodi olettaa ett‰ on olemassa RobotinMaailma.java, 
-	* jonne talletetaan ruudut joissa on k‰yty ja niiden tiedot.
+	/*Alla oleva on karkea hutaisu, jossa on tavoiteltu oikeaa ideaa mutta kaikki muu on melko v√§√§rin. 
+	* Koodi olettaa ett√§ on olemassa RobotinMaailma.java, 
+	* jonne talletetaan ruudut joissa on k√§yty ja niiden tiedot.
 	*
-	*t‰m‰ algoritmi on siis kaikki mit‰ tehd‰‰n ennen askelta
-	*ts. robotin p‰‰tˆksentekoprosessi.
+	*t√§m√§ algoritmi on siis kaikki mit√§ tehd√§√§n ennen askelta
+	*ts. robotin p√§√§t√∂ksentekoprosessi.
 	 */
 
 	private Ruutu edellinenRuutu; 
-	//^ t‰m‰ voisi oikeastaan kuulua robotille.
+	//^ t√§m√§ voisi oikeastaan kuulua robotille.
 	
-	//robotissa tehd‰‰n esim. seuraava temppu: 
+	//robotissa tehd√§√§n esim. seuraava temppu: 
 	//edellinenruutu = nykyinenruutu
 	//nykyinenruutu = uusiruutu
 	
 	
 	robo.ruutu.lisaaLaskuria();
 	//^ ruudulla (tai RobotinMaailmassa) on laskuri jota kasvatetaan aina kun
-	//ko. ruutuun menn‰‰n. T‰m‰kin rivi voi ehk‰ olla robotissa.
+	//ko. ruutuun menn√§√§n. T√§m√§kin rivi voi ehk√§ olla robotissa.
 
 	public void pyorahda() {
-		//T‰m‰ metodi tutkii naapurustosta mihin suuntiin voi menn‰.
+		//T√§m√§ metodi tutkii naapurustosta mihin suuntiin voi menn√§.
 		
 		boolean voiEdetaPohjoiseen, 
 		voiEdetaItaan, voiEdetaEtelaan,
@@ -37,7 +37,7 @@ public class Algoritmi {
 			robo.kaannyOikealle();	
 
 			boolean[] eteneminenSuunnittain = new boolean[4]; 
-			//^t‰m‰KIN on oikeastaan ruudun ominaisuus
+			//^t√§m√§ taas on oikeastaan ruudun ominaisuus
 			
 			
 			
@@ -45,7 +45,7 @@ public class Algoritmi {
 			
 			switch(robo.annaSuunta()) {
 			case 0 : { 
-				//eli case 0 tarkoittaa ett‰ robo katsoo pohjoiseen
+				//eli case 0 tarkoittaa ett√§ robo katsoo pohjoiseen
 
 				if(voikoEdeta) {
 					eteneminenSuunnittain[0]= true;
@@ -81,7 +81,7 @@ public class Algoritmi {
 		
 		
 		
-		//alla on for-lause joka k‰y kaikki ilmansuunnat l‰pi ja tallettaa taulukkoon
+		//alla on for-lause joka k√§y kaikki ilmansuunnat lÔøΩpi ja tallettaa taulukkoon
 		for (aaa = 0; aaa < 4; aaa++) {
 	
 		if (robo.ruutu.eteneminenSuunnittain[aaa] = true) {
@@ -89,7 +89,7 @@ public class Algoritmi {
 				if (RobotinMaailma.annaRuutu(/*suunnassa aaa*/) == null 
 						&& robo.ruutu.eteneminenSuunnittain[aaa] == true) {
 			
-					//eli jos naapuria ei tunneta (eli siell‰ ei ole k‰yty) mutta sinne voi edet‰, 
+					//eli jos naapuria ei tunneta (eli siell√§ ei ole k√§yty) mutta sinne voi edet√§, 
 					//sen laskurin katsotaan olevan 0 
 			
 					//johonkin tarvitaan metodi joka antaa RobonMaailmasta naapuriruudun suunnassa "aaa"
@@ -98,7 +98,7 @@ public class Algoritmi {
 				
 				}
 				else naapurienLaskurit[aaa] = RobotinMaailma.annaRuutu(/*suunnassa aaa*/).annaLaskurinArvo();
-				//muutoin kysyt‰‰n RobonMaailmalta ruudun laskurin arvo
+				//muutoin kysyt√§√§n RobonMaailmalta ruudun laskurin arvo
 		
 		}
 		}
@@ -111,7 +111,7 @@ public class Algoritmi {
 		if (a) {
 		return a;}
 	int b = Arrays.binarySearch(naapurienLaskurit, 1);
-		//pulma: miten tarkastaa lˆyt‰‰kˆ binary mit‰‰n? int: lle kun ei voi tehd‰ true/false tarkastelua 
+		//pulma: miten tarkastaa l√∂yt√§√§k√∂ binary mit√§√§n? int: lle kun ei voi tehd√§ true/false tarkastelua 
 	}
 	
 	
