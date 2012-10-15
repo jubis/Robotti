@@ -1,1 +1,6 @@
-Robotin fasilitointi, 29.10., Matti Meik�l�inen, kesken
+﻿//Robotin fasilitointi, 29.10., Matti Meikäläinen, kesken
+
+Algoritmi, su 21.10., { Johannes, Jaakko H, Aleksi }, tehtävä jaettu
+Algoritmin metodivaatimukset, la 20.10. klo 23.59, samat jäbät, tehtävä jaettu
+Karttaruutu, DL auki, { Noora, Matilda, Emmi  }, tehtävä jaettu
+ 

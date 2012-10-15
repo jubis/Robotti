@@ -13,13 +13,13 @@ Algoritmi
 	- attribuutti edellinenRuutu
 
 	- tarkistaa
-		- mihin suuntiin tästä ruudusta on menty ja monta kertaa
+		- mihin suuntiin tÃ¤stÃ¤ ruudusta on menty ja monta kertaa
 			- jos risteys
 				- jos uusiruutu-> arpoo
-				- menee oletuksena siihen suuntaa, jossa on käyty vähiten
-				- sulkee, jos kaksi käyntiä ( kts. RobotinMaailma.suljeSuunta() )
-			- jos käytävä tai mutka ( vain yksi kulkusuunta eteenpäin )
-				- jatkaa eteenpäin
+				- menee oletuksena siihen suuntaa, jossa on kÃ¤yty vÃ¤hiten
+				- sulkee, jos kaksi kÃ¤yntiÃ¤ ( kts. RobotinMaailma.suljeSuunta() )
+			- jos kÃ¤ytÃ¤vÃ¤ tai mutka ( vain yksi kulkusuunta eteenpÃ¤in )
+				- jatkaa eteenpÃ¤in
 			- jos umpikuja 
 				- palaa edelliseen risteykseenÃ¤
 
@@ -32,15 +32,15 @@ RobotinAlgoritmi
 	- etenemissuunnat = 1 -> true
 
 - int annaEtenemissuuntienMaara()
-	- pörähtää ympäri ja tarkastaa kaikki suunnat
+	- pyÃ¶rÃ¤htÃ¤Ã¤ ympÃ¤ri ja tarkastaa kaikki suunnat
 	- for-silmukka - toistetaan 4 kertaa
 	- kaannyVasemmalle()
 	- voiEdeta()
-	- lisää listaan ilmansuunnan numeron
+	- lisÃ¤Ã¤ listaan ilmansuunnan numeron
 
 - toimiKaytavalla() 
-	- kysyy jokaiselta naapurilta mikä on sen ruudun käyntiluku
-	- menee siihen ruutuu, jossa on pienin käyntiluku
+	- kysyy jokaiselta naapurilta mikÃ¤ on sen ruudun kÃ¤yntiluku
+	- menee siihen ruutuu, jossa on pienin kÃ¤yntiluku
 	
 - toimiUmpikujassa()
-	- käänny takaisin
+	- kÃ¤Ã¤nny takaisin
