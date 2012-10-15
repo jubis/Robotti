@@ -1,0 +1,4 @@
+Suunnittelemattomia metodeja:
+RobotinMaailma
+	public RobotinRuutu annaRuutu( Point sijainti, int suunta )
+	public void lisaaLaskuria( Point sijainti )
