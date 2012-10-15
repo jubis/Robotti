@@ -1,4 +1,4 @@
-RobotinMaailma
+ï»¿RobotinMaailma
 	- avoimetSuunnat( Point piste, int[] avoimetSuunnat )
 	- suljeSuunta( Point piste, int suunta )
 	- annaNaapuriSuunnassa( Point piste, int suunta )
@@ -21,7 +21,7 @@ Algoritmi
 			- jos käytävä tai mutka ( vain yksi kulkusuunta eteenpäin )
 				- jatkaa eteenpäin
 			- jos umpikuja 
-				- palaa edelliseen risteykseen
+				- palaa edelliseen risteykseenÃ¤
 
 RobotinAlgoritmi
 - boolean onkoRisteyksessa()
