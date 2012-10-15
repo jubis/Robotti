@@ -1,4 +1,4 @@
 
 public class Robotti {
-	public void etene() {}
+	public boolean etene() {return true;}
 }
