@@ -4,3 +4,6 @@
 *.jar
 *.war
 *.ear
+
+# Some mac shit #
+.DS_Store
