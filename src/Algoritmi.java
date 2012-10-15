@@ -40,7 +40,13 @@ public class Algoritmi {
 			//^tämä taas on oikeastaan ruudun ominaisuus
 			
 			
-			
+			/**
+			 * oisko tähän parempi suoraan 
+			 * ilman switch- tai if-lauseita pelkästään:
+			 * ###
+			 * eteneminenSunnittain[ robo.annaSuunta() ] = voikoEdeta();
+			 * ###
+			 */
 			
 			
 			switch(robo.annaSuunta()) {
