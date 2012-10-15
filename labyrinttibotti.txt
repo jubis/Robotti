@@ -1,0 +1,46 @@
+RobotinMaailma
+	- avoimetSuunnat( Point piste, int[] avoimetSuunnat )
+	- suljeSuunta( Point piste, int suunta )
+	- annaNaapuriSuunnassa( Point piste, int suunta )
+		- palauttaa naapuriruudun pisteen
+	- annaRuudunKayntiMaara( Point piste, int suunta )
+		- palauttaa, kuinka monta kertaa ruudussa on kayty
+	- 
+Ruutu 
+	- 
+	
+Algoritmi
+	- attribuutti edellinenRuutu
+
+	- tarkistaa
+		- mihin suuntiin tästä ruudusta on menty ja monta kertaa
+			- jos risteys
+				- jos uusiruutu-> arpoo
+				- menee oletuksena siihen suuntaa, jossa on käyty vähiten
+				- sulkee, jos kaksi käyntiä ( kts. RobotinMaailma.suljeSuunta() )
+			- jos käytävä tai mutka ( vain yksi kulkusuunta eteenpäin )
+				- jatkaa eteenpäin
+			- jos umpikuja 
+				- palaa edelliseen risteykseen
+
+RobotinAlgoritmi
+- boolean onkoRisteyksessa()
+	- jos etenemissuunnat >= 3
+- boolean onkoKaytavalla()
+	- jos etenemissuunnat = 2 -> true
+- boolean onkoUmpikujalla()
+	- etenemissuunnat = 1 -> true
+
+- int annaEtenemissuuntienMaara()
+	- pörähtää ympäri ja tarkastaa kaikki suunnat
+	- for-silmukka - toistetaan 4 kertaa
+	- kaannyVasemmalle()
+	- voiEdeta()
+	- lisää listaan ilmansuunnan numeron
+
+- toimiKaytavalla() 
+	- kysyy jokaiselta naapurilta mikä on sen ruudun käyntiluku
+	- menee siihen ruutuu, jossa on pienin käyntiluku
+	
+- toimiUmpikujassa()
+	- käänny takaisin
