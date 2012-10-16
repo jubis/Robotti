@@ -1,9 +1,9 @@
-
-
-
 import java.util.Arrays;
+import java.util.Random;
 
 public class Algoritmi {
+
+	private Random kone = new Random();
 
 	/**Alla oleva koodi on vielä karkeahkoa.
 	 * 
@@ -24,7 +24,7 @@ public class Algoritmi {
 
 	robo.maailma.lisaaLaskuria( this.tamaRuutu );
 	//^ ruudulla (tai RobotinMaailmassa) on laskuri jota kasvatetaan aina kun
-	//ko. ruutuun mennään. Tämäkin rivi voi ehkä olla robotissa. -Johannes
+	//ko. ruutuun mennään. -Johannes
 
 	public void pyorahda() {
 		//Tämä metodi tutkii naapurustosta mihin suuntiin voi mennä.
@@ -58,7 +58,7 @@ public class Algoritmi {
 
 		int[] naapurienLaskurit = new int[4];
 		//^^tämäkin taulukko voisi olla Ruudussa. -Johannes
-		
+
 		int suunta;
 
 
@@ -68,7 +68,7 @@ public class Algoritmi {
 
 			if (robo.ruutu.eteneminenSuunnittain[suunta] = true) {
 
-				if (RobotinMaailma.annaRuutu(/*suunnassa aaa*/) == null 
+				if (RobotinMaailma.annaNaapuri(suunta) == null 
 						&& robo.ruutu.eteneminenSuunnittain[suunta] == true) {
 
 					//eli jos naapuria ei tunneta (eli siellä ei ole käyty) 
@@ -89,6 +89,10 @@ public class Algoritmi {
 
 
 			}
+			else if (robo.ruutu.eteneminenSuunnittain[suunta] == false) {
+				naapurienLaskurit[suunta] = 5;
+				//seinää edustaa käyntilaskurin luku 5
+			}
 		}
 		//palautetaan taulukko, jossa indeksi (0-3) 
 		//on ilmansuunta ja sen arvo on naapuriruudun laskurin arvo
@@ -96,53 +100,110 @@ public class Algoritmi {
 	}
 
 
-	public boolean onkoRisteys() {
-		
+
+	public int annaNaapurienMaara(Ruutu tamaruutu) {
+		int naapurit;
+		for (int a = 0; a < 3; a++) { 
+			if (tamaruutu.eteneminenSuunnittain[a]) {
+				naapurit++;
+			}
+		}
+		return naapurit;
+	}
+
+	public boolean onkoRisteys(Ruutu tamaruutu) {
+
+		if (annaNaapurienMaara(tamaruutu) > 2) {
+			return true;
+		}
+		else return false;
+	}
+
+	public boolean onkoUmpikuja(RobotinRuutu tamaruutu) {
+		int naapurienLaskurit[] = tutkaile();
+
+		if (//annaNaapurienMaara(tamaruutu) == 1 &&
+				   naapurienLaskurit[0] > 1 
+				&& naapurienLaskurit[1] > 1 
+				&& naapurienLaskurit[2] > 1 
+				&& naapurienLaskurit[3] > 1) {
+
+			return true;
+		}
+		else return false;
+	
+		//ruutu on "umpikuja" jos kaikkien naapureiden käyntilaskurit yli 2 (seinät = 5)
 	}
 
 	/** luottolähteemme
 	 * 
 	http://www.astrolog.org/labyrnth/algrithm.htm
 	http://en.wikipedia.org/wiki/Maze_solving_algorithm
-	
+
 	kertovat, että risteykset vaativat erityiskohtelua, siksi ylläoleva metodi (vielä tyhjä).
 	-Johannes
-	*/
-	
-	public int teeSuuntaPaatos() {
+	 */
 
+	public int arvoEriSuunta(int nytsuunta) {
+		int ulossuunta = nytsuunta + kone.nextInt(3) + 1;
+		return ulossuunta;
+	}
+
+	public int teeSuuntaPaatos() {
+		int suunta;
 		int[] naapurienLaskurit = tutkaile();	
 
 		int a = Arrays.binarySearch(naapurienLaskurit, 0);
+
 		if (a >= 0) {
-			return a;
-		}
-		int b = Arrays.binarySearch(naapurienLaskurit, 1);
-		if (b >= 0) {
-			return b;
+			suunta = a;
 		}
 
-		/**	a on siis ensimmäinen suunta pohjoisesta myötäpäivään sellaiseen ruutuun, jossa käyty 0 kertaa
-		 *	b sellaiseen jossa käyty kerran
-		 *
-		 * tämä ei nyt vielä ota risteyslaskureita huomioon (saavat arvoja > 2)
+		else {
+			int b = Arrays.binarySearch(naapurienLaskurit, 1);
+			if (b >= 0) {
+				suunta = b;
+			}
+		}
+
+		if (onkoRisteys(RobonMaailma.annaNaapuri(suunta)) 
+				&& naapurienLaskurit[suunta] == 1 
+				&& onkoUmpikuja(RobonMaailma.annaRuutu(/*tama*/)) == false) {
+
+			arvoEriSuunta(suunta);
+		}
+	
+
+	if (onkoUmpikuja(RobonMaailma.annaRuutu(/*tama*/))) {
+
+		return suunta;
+	}
+	}
+	/** jos edessä on risteys jossa käyty kerran ja nykyinen ruutu ei ole umpikuja (kts. umpikujametodi), arvotaan uusi, eri suunta
+
+
+	 */
+	/**	a on siis ensimmäinen suunta pohjoisesta myötäpäivään sellaiseen ruutuun, jossa käyty 0 kertaa
+	 *	b sellaiseen jossa käyty kerran
+	 *
+	 * tämä ei nyt vielä ota risteyslaskureita huomioon (saavat arvoja > 2)
 		/-Johannes
 	/**
-		 * binäärihaku palauttaa negatiivisen luvun, jos se ei löytänyt mitään
-		 * jos se löysi, se palauttaa _muistaakseni_ ensimmäisen täsmäävän
-		 * alkion indeksin
-		 * kts. Java API
-		 * -Matias
-		 * 
-		 * Muokattu - Johannes
-		 */
-	}
+	 * binäärihaku palauttaa negatiivisen luvun, jos se ei löytänyt mitään
+	 * jos se löysi, se palauttaa _muistaakseni_ ensimmäisen täsmäävän
+	 * alkion indeksin
+	 * kts. Java API
+	 * -Matias
+	 * 
+	 * Muokattu - Johannes
+	 */
+}
 
 
 
-	public static void main(String[] args) {
-		System.out.println("Testing more");
+public static void main (String[] args) {
+	System.out.println("Testing more");
 
-	}
+}
 
 }
