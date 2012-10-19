@@ -21,6 +21,8 @@ public class Algoritmi {
 	//edellinenruutu = nykyinenruutu
 	//nykyinenruutu = uusiruutu -Johannes
 
+	boolean[] eteneminenSuunnittain = new boolean[4]; 
+	//^tämä on oikeastaan ruudun ominaisuus, pitää ajallaan siirtää sinne -Johannes
 
 	robo.maailma.lisaaLaskuria( this.tamaRuutu );
 	//^ ruudulla (tai RobotinMaailmassa) on laskuri jota kasvatetaan aina kun
@@ -29,8 +31,7 @@ public class Algoritmi {
 	public void pyorahda() {
 		//Tämä metodi tutkii naapurustosta mihin suuntiin voi mennä.
 
-		boolean[] eteneminenSuunnittain = new boolean[4]; 
-		//^tämä on oikeastaan ruudun ominaisuus, pitää ajallaan siirtää sinne -Johannes
+
 
 		for (int i = 0; i < 4; i++) {
 
@@ -109,6 +110,7 @@ public class Algoritmi {
 			}
 		}
 		return naapurit;
+		//metodi laskee ruudun etenemiskelpoisten naapurien määrän
 	}
 
 	public boolean onkoRisteys(Ruutu tamaruutu) {
@@ -117,22 +119,28 @@ public class Algoritmi {
 			return true;
 		}
 		else return false;
+		//käyttää naapurimäärälaskuria määrittäessään, onko parametriruutu risteys
+		// risteys <=> yli 2 naapuria
 	}
 
 	public boolean onkoUmpikuja(RobotinRuutu tamaruutu) {
-		int naapurienLaskurit[] = tutkaile();
+		int naapurienLaskurit[] = tutkaile(); //haetaan taulukko tutkailumetodilta
+		int noGo;
 
-		if (//annaNaapurienMaara(tamaruutu) == 1 &&
-				   naapurienLaskurit[0] > 1 
-				&& naapurienLaskurit[1] > 1 
-				&& naapurienLaskurit[2] > 1 
-				&& naapurienLaskurit[3] > 1) {
+		for (int i = 0; i > 3; i++) {
 
+			if (naapurienLaskurit[i] >= 2) {
+				noGo++;
+			}
+		}
+		if (noGo == 3) {
 			return true;
 		}
+		
 		else return false;
-	
-		//ruutu on "umpikuja" jos kaikkien naapureiden käyntilaskurit yli 2 (seinät = 5)
+
+		//ruutu on "umpikuja" jos tasan kolmen naapurin käyntilaskurit 2 tai yli (seinät = 5)
+		//jos 4 naapurilla >=2, ollaan alussa, maalissa tai kusessa.
 	}
 
 	/** luottolähteemme
@@ -140,13 +148,13 @@ public class Algoritmi {
 	http://www.astrolog.org/labyrnth/algrithm.htm
 	http://en.wikipedia.org/wiki/Maze_solving_algorithm
 
-	kertovat, että risteykset vaativat erityiskohtelua, siksi ylläoleva metodi (vielä tyhjä).
 	-Johannes
 	 */
 
 	public int arvoEriSuunta(int nytsuunta) {
-		int ulossuunta = nytsuunta + kone.nextInt(3) + 1;
+		int ulossuunta = nytsuunta + (kone.nextInt(3) + 1);
 		return ulossuunta;
+		//tämä metodi antaa suunnan, joka ei ole sama kuin parametrina annettu
 	}
 
 	public int teeSuuntaPaatos() {
@@ -154,56 +162,64 @@ public class Algoritmi {
 		int[] naapurienLaskurit = tutkaile();	
 
 		int a = Arrays.binarySearch(naapurienLaskurit, 0);
-
+		//etsii taulukosta sellaisen indeksin (eli suunnan) jonka arvo (eli käyntilaskuri) on nolla
 		if (a >= 0) {
+			//jos löytyy 0 tai suurempi indeksi, sijoitetaan
 			suunta = a;
 		}
 
 		else {
 			int b = Arrays.binarySearch(naapurienLaskurit, 1);
+			//muuten etsii taulukosta sellaisen indeksin (eli suunnan) jonka arvo (eli käyntilaskuri) on yksi
 			if (b >= 0) {
+				//jos löytyy 0 tai suurempi indeksi, sijoitetaan
 				suunta = b;
 			}
 		}
 
-		if (onkoRisteys(RobonMaailma.annaNaapuri(suunta)) 
+		if (onkoUmpikuja(RobonMaailma.annaRuutu(/*tama*/)) == false
 				&& naapurienLaskurit[suunta] == 1 
-				&& onkoUmpikuja(RobonMaailma.annaRuutu(/*tama*/)) == false) {
-
-			arvoEriSuunta(suunta);
+				&& onkoRisteys(RobonMaailma.annaNaapuri(suunta))) {
+			/**jos ruutu jossa ollaan nyt EI ole umpikuja (kts. umpikujametodi)
+			*JA
+			*"suunta"-muuttujaan sijoitetussa suunnassa on ruutu joka on risteys 
+			*JA
+			*tuon risteyksen laskurin arvo on 1
+			*arvotaan uusi suunta joka on eri kuin nykyinen.
+			*/
+			int uusisuunta = arvoEriSuunta(suunta);
+			
+		
+			if (eteneminenSuunnittain[uusisuunta] == false) {
+				teeSuuntaPaatos();
+			}
+			//^testataan vielä voiko uuteen suuntaan edetä, jos ei niin kutsutaan tätä metodia uudestaan
+			else if (eteneminenSuunnittain[uusisuunta] == true) {
+				return uusisuunta;
+				//^jos voi niin mennään sinne.
+			}
 		}
-	
 
-	if (onkoUmpikuja(RobonMaailma.annaRuutu(/*tama*/))) {
+		else 
 
 		return suunta;
-	}
-	}
-	/** jos edessä on risteys jossa käyty kerran ja nykyinen ruutu ei ole umpikuja (kts. umpikujametodi), arvotaan uusi, eri suunta
 
-
-	 */
-	/**	a on siis ensimmäinen suunta pohjoisesta myötäpäivään sellaiseen ruutuun, jossa käyty 0 kertaa
-	 *	b sellaiseen jossa käyty kerran
-	 *
-	 * tämä ei nyt vielä ota risteyslaskureita huomioon (saavat arvoja > 2)
-		/-Johannes
 	/**
-	 * binäärihaku palauttaa negatiivisen luvun, jos se ei löytänyt mitään
-	 * jos se löysi, se palauttaa _muistaakseni_ ensimmäisen täsmäävän
-	 * alkion indeksin
-	 * kts. Java API
-	 * -Matias
-	 * 
-	 * Muokattu - Johannes
-	 */
-}
+		 * binäärihaku palauttaa negatiivisen luvun, jos se ei löytänyt mitään
+		 * jos se löysi, se palauttaa _muistaakseni_ ensimmäisen täsmäävän
+		 * alkion indeksin
+		 * kts. Java API
+		 * -Matias
+		 * 
+		 * Muokattu - Johannes
+		 */
+	}
 
 
 
-public static void main (String[] args) {
-	System.out.println("Testing more");
+	public static void main (String[] args) {
+		System.out.println("Testing more");
 
-}
+	}
 
 }
