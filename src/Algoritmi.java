@@ -16,14 +16,15 @@ public class Algoritmi {
 	 * 
 	 * Koodin oletukset: 
 	 * 1. on olemassa RobotinMaailma.java, jonne talletetaan ruudut joissa on käyty ja niiden tiedot.
-	 * 2. on olemassa RobotinRuutu.java jonka oliot kootaan robotin keräämien tietojen pohjalta ja lisätään RobotinMaailmaan
-	 * 3. on olemassa OmaRobotti.java (tms) joka käyttää tämän luokan metodeja (tai metodeja siirretään sinne, miten vain on järkevää)
-	 * 4. OmaRobotti perii valmiin Robotti-luokan
+	 * 2. on olemassa RobotinRuutu.java jonka oliot kootaan robotin keräämien tietojen pohjalta ja lisätään RobotinMaailmaan.
+	 * 3. on olemassa OmaRobotti.java (vast) joka käyttää tämän luokan metodeja (tai metodeja siirretään sinne, miten vain on järkevää).
+	 * 4. OmaRobotti perii valmiin Robotti-luokan.
 	 * 
-	 * koodissa robo tarkoittaa robottioliota.
+	 * koodissa "robo" tarkoittaa OmaRobotti-oliota.
 	 *
-	 *tämä algoritmi on siis kaikki mitä tehdään ennen askelta
-	 *ts. robotin päätöksentekoprosessi. -Johannes
+	 * tämä algoritmi on siis kaikki mitä tehdään ennen askelta
+	 * ts. robotin päätöksentekoprosessi.
+	 *  -Johannes
 	 */ 
 	
 	
@@ -40,45 +41,45 @@ public class Algoritmi {
 	/**tarvittavat metodit:
 	
 		RobotinRuutu RobotinMaailma.annaNaapuri(int suunta)		
-		
-			antaa RobonMaailmasta naapuriruudun suunnassa "suunta". Algoritmi huomioi sen jos ruutua ei vielä RobonMaailmassa ole.
+				antaa RobonMaailmasta naapuriruudun suunnassa "suunta". Algoritmi huomioi sen jos ruutua ei vielä RobonMaailmassa ole.
 		
 		int RobotinRuutu.annaLaskurinArvo()				
+				antaa laskurin arvon
+
+	Tarvittava attribuutti: 
 		
-			antaa laskurin arvon
+		RobotinRuutu robo.sijaintiRuutu
+		 	OmaRobotissa sijaitseva tieto tämänhetkisestä sijainnista. käyttää seuraavaa metodia
+
+						RobotinRuutu RobonMaailma.annaRuutu(RobotinRuutu tamaRuutu)
+												
+
+	algo viittaa robon sijaintiin vain attribuutilla. 
+	*/
 	
-		RobotinRuutu RobonMaailma.annaRuutu(RobotinRuutu tamaRuutu)
-		
-			antaa ruudun
 	
+	/** alla vielä luokan vaatimia mitkä varmaankin kuuluvat muualle:
 	*/
 	
 	private RobotinRuutu edellinenRuutu; 
 	//^ tämä kuuluu ehkä RobonMaailmalle -Johannes
 	
 	boolean[] eteneminenSuunnittain = new boolean[4]; 
-	//^tämä on oikeastaan RobonRuudun ominaisuus: boolean-taulukko, jonka arvo kertoo voiko suuntaan (0-3) edetä. -Johannes
+	//^tämä on oikeastaan RobotinRuudun ominaisuus. Se on boolean-taulukko, jonka arvo kertoo voiko suuntaan (indeksi 0-3) edetä.
 	
-	robo.maailma.lisaaLaskuria( this.tamaRuutu );
-	//^ RobonRuudulla (tai RobonMaailmassa) on käyntilaskuri jota kasvatetaan aina kun ko. ruutuun mennään. -Johannes
+	robo.RobotinMaailma.lisaaLaskuria(this.tamaRuutu);
+	//^ RobotinRuudulla tai RobotinMaailmassa on käyntilaskuri jota kasvatetaan aina kun ko. ruutuun mennään. luokka oikeastaan ei käytä tätä suoraan.
 	
 	int[] naapurienLaskurit = new int[4];
-	//^^tämäkin taulukko voisi olla Ruudussa. Käyttäjä on tämän luokan tutkaile()-metodi.
+	//^tämä taulukko voisi olla RobotinRuudussa. Käyttäjä on tämän luokan tutkaile()-metodi.
 	
 	//robotissa tehdään esim. seuraava temppu: 
 		//edellinenruutu = nykyinenruutu
-		//nykyinenruutu = uusiruutu -Johannes
+		//nykyinenruutu = uusiruutu 
+		//-Johannes
 	
 	
-	
-	/**Alla oleva koodi on vielä karkeahkoa.
-	 * 
-	 * Koodi olettaa että on olemassa RobotinMaailma.java, 
-	 * jonne talletetaan ruudut joissa on käyty ja niiden tiedot.
-	 *
-	 *tämä algoritmi on siis kaikki mitä tehdään ennen askelta
-	 *ts. robotin päätöksentekoprosessi. -Johannes
-	 */ 
+
 
 	
 	
@@ -87,7 +88,7 @@ public class Algoritmi {
 
 
 	public void pyorahda() {
-		//Tämä metodi tutkii naapurustosta mihin suuntiin voi mennä.
+		//Tämä metodi tutkii naapurustostaan mihin suuntiin voi mennä.
 
 
 
@@ -96,19 +97,6 @@ public class Algoritmi {
 			RobotinRuutu.eteneminenSuunnittain[robo.annaSuunta()] = robo.voiEdeta();
 			robo.kaannyOikealle();	
 
-			/**
-			 * oisko tähän parempi suoraan 
-			 * ilman switch- tai if-lauseita pelkästään:
-			 * ###
-			 * eteneminenSunnittain[ robo.annaSuunta() ] = voikoEdeta();
-			 * ### 
-			 * -Matias
-			 */
-
-			/**
-			 * Poistin switchin, nyt aloittaa menosuunnasta ja käy 4 suuntaa läpi
-			 * -Johannes
-			 */
 		}
 
 	}
@@ -121,10 +109,6 @@ public class Algoritmi {
 
 			if (robo.sijaintiRuutu.eteneminenSuunnittain[suunta] = true) {
 
-				/**
-				 * sijaintiRuutu tai vast. attribuutti tarvitaan robolle.
-				*/
-				
 				if (RobotinMaailma.annaNaapuri(suunta) == null 
 						&& robo.sijaintiRuutu.eteneminenSuunnittain[suunta] == true) {
 
@@ -132,6 +116,9 @@ public class Algoritmi {
 					//mutta sinne voi edetä, sen laskurin katsotaan olevan 0 
 					//vaatii metodin RobotinMaailma.annaNaapuri(suunta)
 	
+					/**
+					 * sijaintiRuutu tai vast. attribuutti tarvitaan robolle. kts. alussa.
+					*/
 
 					naapurienLaskurit[suunta] = 0;
 
@@ -139,7 +126,7 @@ public class Algoritmi {
 				
 				else {
 					naapurienLaskurit[suunta] = RobotinMaailma
-							.annaNaapuri(/*suunnassa aaa*/)
+							.annaNaapuri(suunta)
 							.annaLaskurinArvo();
 					//muutoin kysytään RobonMaailmalta ruudun laskurin arvo
 				}
@@ -183,15 +170,15 @@ public class Algoritmi {
 		int naapurienLaskurit[] = tutkaile(); 
 		//haetaan taulukko tutkaile() -metodilta. tutkaile() käyttää aina tämänhetkistä sijaintiruutua, siksi metodilla ei parametria.
 		
-		int alaMene;
+		int liikaa;
 
 		for (int i = 0; i > 3; i++) {
 
 			if (naapurienLaskurit[i] >= 2) {
-				alaMene++;
+				liikaa++;
 			}
 		}
-		if (alaMene == 3) {
+		if (liikaa == 3) {
 			return true;
 		}
 		
@@ -206,12 +193,13 @@ public class Algoritmi {
 
 	public int arvoEriSuunta(int nytsuunta) {
 		int ulossuunta = kone.nextInt(4);
+		
 		if (ulossuunta == nytsuunta) {
 			arvoEriSuunta(nytsuunta);
 			}
 		
 		else return ulossuunta;
-		//tämä metodi antaa suunnan, joka on eri kuin parametri. sisältää rekursion.
+		//tämä metodi antaa suunnan, joka on eri kuin parametri. sisältää kivan rekursion.
 	}
 
 	public int teeSuuntaPaatos() {
