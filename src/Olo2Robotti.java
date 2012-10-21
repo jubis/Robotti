@@ -1,7 +1,5 @@
 
-public class Olo2Robotti extends Robotti {
-	public Olo2Robotti() {
-	}
+public class Olo2Robotti extends Robotti {	
 	
 	public void teeSiirto() {
 		RobotinMaailma.siirry( suunta );
