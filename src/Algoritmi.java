@@ -49,12 +49,18 @@ public class Algoritmi {
 		
 		int RobotinRuutu.annaLaskurinArvo()				
 				antaa laskurin arvon
-
+		
+		void RobotinRuutu.asetaVoikoEdeta( int suunta, boolean voikoEdeta )
+				tallentaa ruudun tietoihin, mihin suuntiin tästä ruudusta pääsee
+		
+		boolean voikoSuuntaanEdeta( int suunta )
+				palauttaa, voiko tästä ruudusta kulkea annettuun suuntaan
+		
 	Tarvittava attribuutti: 
 		
-		RobotinRuutu robo.sijaintiRuutu
-		 	OmaRobotissa sijaitseva tieto tämänhetkisestä sijainnista. käyttää 
-		 	seuraavaa metodia
+		RobotinRuutu robo.annaSijaintiruutu()
+		 	OmaRobotissa sijaitseva tieto tämänhetkisestä sijainnista. 
+		 	käyttää	seuraavaa metodia
 
 					RobotinRuutu RobonMaailma.annaRuutu(RobotinRuutu tamaRuutu)
 												
@@ -68,10 +74,6 @@ public class Algoritmi {
 	
 	private RobotinRuutu edellinenRuutu; 
 	//^ tämä kuuluu ehkä RobonMaailmalle -Johannes
-	
-	boolean[] eteneminenSuunnittain = new boolean[4]; 
-	//^tämä on oikeastaan RobotinRuudun ominaisuus. Se on boolean-taulukko, 
-	//jonka arvo kertoo voiko suuntaan (indeksi 0-3) edetä.
 	
 	robo.RobotinMaailma.lisaaLaskuria(this.tamaRuutu);
 	//^ RobotinRuudulla tai RobotinMaailmassa on käyntilaskuri jota kasvatetaan 
@@ -102,8 +104,8 @@ public class Algoritmi {
 
 		for (int i = 0; i < 4; i++) {
 
-			RobotinRuutu.eteneminenSuunnittain[robo.annaSuunta()] = 
-														robo.voiEdeta();
+			RobotinRuutu.asetaVoikoEdeta( robo.annaSuunta(), 
+			                              robo.voiEdeta() ); 
 			robo.kaannyOikealle();	
 
 		}
@@ -120,7 +122,7 @@ public class Algoritmi {
 			if (robo.sijaintiRuutu.eteneminenSuunnittain[suunta] = true) {
 
 				if (RobotinMaailma.annaNaapuri(suunta) == null 
-					&& robo.sijaintiRuutu.eteneminenSuunnittain[suunta] == true) {
+					&& robo.sijaintiRuutu.voikoSuuntaanEdeta(suunta)) {
 
 					//eli jos naapuria ei tunneta (eli siellä ei ole käyty) 
 					//mutta sinne voi edetä, sen laskurin katsotaan olevan 0 
@@ -159,7 +161,7 @@ public class Algoritmi {
 	public int annaNaapurienMaara(RobotinRuutu keskiRuutu) {
 		int naapurit;
 		for (int a = 0; a < 3; a++) { 
-			if (keskiRuutu.eteneminenSuunnittain[a]) {
+			if (keskiRuutu.voikoSuuntaanEdeta( a )) {
 				naapurit++;
 			}
 		}
@@ -249,7 +251,7 @@ public class Algoritmi {
 				&& naapurienLaskurit[suunta] == 1 
 				&& onkoRisteys(RobonMaailma.annaNaapuri(suunta))) {
 		
-			int uusisuunta = arvoEriSuunta(suunta);
+			int uusiSuunta = arvoEriSuunta(suunta);
 			
 			/**jos ruutu jossa ollaan nyt EI ole umpikuja (kts. umpikujametodi)
 			*JA
@@ -264,13 +266,13 @@ public class Algoritmi {
 			
 			
 		
-			if (eteneminenSuunnittain[uusisuunta] == false) {
+			if (! voikoSuuntaanEdeta( uusiSuunta )) {
 				teeSuuntaPaatos();
 			}
 			//^testataan vielä voiko uuteen suuntaan edetä, 
 			//jos ei niin kutsutaan tätä metodia uudestaan (rekursio)
-			else if (eteneminenSuunnittain[uusisuunta] == true) {
-				return uusisuunta;
+			else {
+				return uusiSuunta;
 				//^jos voi niin mennään sinne.
 			}
 		}
