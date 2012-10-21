@@ -8,7 +8,8 @@ public class RobotinMaailma {
 	 */
 	
 	public static void siirry( int suunta ) {
-		//Muuttaa nykyiseksi ruuduksi annetussa suunnassa olevan naapurin
+		//Muuttaa nykyiseksi ruuduksi sen ruudun, johon siirrytään
+		//*Huom* Tarvittaessa luo uuden ruudun, jos paikalla ei vielä ole sitä
 	}
 	
 	public static RobotinRuutu annaSijainti() {
