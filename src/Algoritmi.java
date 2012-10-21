@@ -15,9 +15,12 @@ public class Algoritmi {
 	/**
 	 * 
 	 * Koodin oletukset: 
-	 * 1. on olemassa RobotinMaailma.java, jonne talletetaan ruudut joissa on käyty ja niiden tiedot.
-	 * 2. on olemassa RobotinRuutu.java jonka oliot kootaan robotin keräämien tietojen pohjalta ja lisätään RobotinMaailmaan.
-	 * 3. on olemassa OmaRobotti.java (vast) joka käyttää tämän luokan metodeja (tai metodeja siirretään sinne, miten vain on järkevää).
+	 * 1. on olemassa RobotinMaailma.java, jonne talletetaan ruudut joissa on 
+	 * 		käyty ja niiden tiedot.
+	 * 2. on olemassa RobotinRuutu.java jonka oliot kootaan robotin keräämien 
+	 * 		tietojen pohjalta ja lisätään RobotinMaailmaan.
+	 * 3. on olemassa OmaRobotti.java (vast) joka käyttää tämän luokan metodeja 
+	 * 		(tai metodeja siirretään sinne, miten vain on järkevää).
 	 * 4. OmaRobotti perii valmiin Robotti-luokan.
 	 * 
 	 * koodissa "robo" tarkoittaa OmaRobotti-oliota.
@@ -41,7 +44,8 @@ public class Algoritmi {
 	/**tarvittavat metodit:
 	
 		RobotinRuutu RobotinMaailma.annaNaapuri(int suunta)		
-				antaa RobonMaailmasta naapuriruudun suunnassa "suunta". Algoritmi huomioi sen jos ruutua ei vielä RobonMaailmassa ole.
+				antaa RobonMaailmasta naapuriruudun suunnassa "suunta". 
+				Algoritmi huomioi sen jos ruutua ei vielä RobonMaailmassa ole.
 		
 		int RobotinRuutu.annaLaskurinArvo()				
 				antaa laskurin arvon
@@ -49,9 +53,10 @@ public class Algoritmi {
 	Tarvittava attribuutti: 
 		
 		RobotinRuutu robo.sijaintiRuutu
-		 	OmaRobotissa sijaitseva tieto tämänhetkisestä sijainnista. käyttää seuraavaa metodia
+		 	OmaRobotissa sijaitseva tieto tämänhetkisestä sijainnista. käyttää 
+		 	seuraavaa metodia
 
-						RobotinRuutu RobonMaailma.annaRuutu(RobotinRuutu tamaRuutu)
+					RobotinRuutu RobonMaailma.annaRuutu(RobotinRuutu tamaRuutu)
 												
 
 	algo viittaa robon sijaintiin vain attribuutilla. 
@@ -65,13 +70,16 @@ public class Algoritmi {
 	//^ tämä kuuluu ehkä RobonMaailmalle -Johannes
 	
 	boolean[] eteneminenSuunnittain = new boolean[4]; 
-	//^tämä on oikeastaan RobotinRuudun ominaisuus. Se on boolean-taulukko, jonka arvo kertoo voiko suuntaan (indeksi 0-3) edetä.
+	//^tämä on oikeastaan RobotinRuudun ominaisuus. Se on boolean-taulukko, 
+	//jonka arvo kertoo voiko suuntaan (indeksi 0-3) edetä.
 	
 	robo.RobotinMaailma.lisaaLaskuria(this.tamaRuutu);
-	//^ RobotinRuudulla tai RobotinMaailmassa on käyntilaskuri jota kasvatetaan aina kun ko. ruutuun mennään. luokka oikeastaan ei käytä tätä suoraan.
+	//^ RobotinRuudulla tai RobotinMaailmassa on käyntilaskuri jota kasvatetaan 
+	//aina kun ko. ruutuun mennään. luokka oikeastaan ei käytä tätä suoraan.
 	
 	int[] naapurienLaskurit = new int[4];
-	//^tämä taulukko voisi olla RobotinRuudussa. Käyttäjä on tämän luokan tutkaile()-metodi.
+	//^tämä taulukko voisi olla RobotinRuudussa. Käyttäjä on tämän luokan 
+	//tutkaile()-metodi.
 	
 	//robotissa tehdään esim. seuraava temppu: 
 		//edellinenruutu = nykyinenruutu
@@ -94,7 +102,8 @@ public class Algoritmi {
 
 		for (int i = 0; i < 4; i++) {
 
-			RobotinRuutu.eteneminenSuunnittain[robo.annaSuunta()] = robo.voiEdeta();
+			RobotinRuutu.eteneminenSuunnittain[robo.annaSuunta()] = 
+														robo.voiEdeta();
 			robo.kaannyOikealle();	
 
 		}
@@ -104,20 +113,22 @@ public class Algoritmi {
 	public int[] tutkaile() {
 		int suunta;
 
-		//alla on for-lause joka käy kaikki ilmansuunnat läpi ja tallettaa taulukkoon
+		//alla on for-lause joka käy kaikki ilmansuunnat läpi 
+		//ja tallettaa taulukkoon
 		for (suunta = 0; suunta < 4; suunta++) {
 
 			if (robo.sijaintiRuutu.eteneminenSuunnittain[suunta] = true) {
 
 				if (RobotinMaailma.annaNaapuri(suunta) == null 
-						&& robo.sijaintiRuutu.eteneminenSuunnittain[suunta] == true) {
+					&& robo.sijaintiRuutu.eteneminenSuunnittain[suunta] == true) {
 
 					//eli jos naapuria ei tunneta (eli siellä ei ole käyty) 
 					//mutta sinne voi edetä, sen laskurin katsotaan olevan 0 
 					//vaatii metodin RobotinMaailma.annaNaapuri(suunta)
 	
 					/**
-					 * sijaintiRuutu tai vast. attribuutti tarvitaan robolle. kts. alussa.
+					 * sijaintiRuutu tai vast. attribuutti tarvitaan robolle. 
+					 * kts. alussa.
 					*/
 
 					naapurienLaskurit[suunta] = 0;
@@ -162,13 +173,15 @@ public class Algoritmi {
 			return true;
 		}
 		else return false;
-		// käyttää naapurimäärälaskuria määrittäessään, onko parametriruutu risteys
+		// käyttää naapurimäärälaskuria määrittäessään, 
+		// onko parametriruutu risteys
 		// risteys <=> yli 2 naapuria
 	}
 
 	public boolean onkoUmpikuja() {
 		int naapurienLaskurit[] = tutkaile(); 
-		//haetaan taulukko tutkaile() -metodilta. tutkaile() käyttää aina tämänhetkistä sijaintiruutua, siksi metodilla ei parametria.
+		//haetaan taulukko tutkaile() -metodilta. tutkaile() käyttää 
+		//aina tämänhetkistä sijaintiruutua, siksi metodilla ei parametria.
 		
 		int liikaa;
 
@@ -184,9 +197,12 @@ public class Algoritmi {
 		
 		else return false;
 
-		//ruutu on "umpikuja" jos tasan kolmen naapurin käyntilaskurit 2 tai yli (seinät = 5)
-		//jos 4 naapurilla >=2, ollaan alussa, maalissa tai kusessa (umpikujassa, jossa ollaan jo käyty).
-		//tämä metodi siis käsittelee sekä seiniä että käytävien käyntilaskureita int:einä.
+		//ruutu on "umpikuja" jos tasan kolmen naapurin käyntilaskurit 2 tai 
+		//yli (seinät = 5)
+		//jos 4 naapurilla >=2, ollaan alussa, maalissa tai kusessa 
+		//(umpikujassa, jossa ollaan jo käyty).
+		//tämä metodi siis käsittelee sekä seiniä että käytävien 
+		//käyntilaskureita int:einä.
 	}
 
 
@@ -199,7 +215,8 @@ public class Algoritmi {
 			}
 		
 		else return ulossuunta;
-		//tämä metodi antaa suunnan, joka on eri kuin parametri. sisältää kivan rekursion.
+		//tämä metodi antaa suunnan, joka on eri kuin parametri. 
+		//sisältää kivan rekursion.
 	}
 
 	public int teeSuuntaPaatos() {
@@ -208,7 +225,8 @@ public class Algoritmi {
 		//haetaan taas naapurien käyntilaskurit tutkailijalta
 
 		int a = Arrays.binarySearch(naapurienLaskurit, 0);
-		//etsii taulukosta sellaisen indeksin (eli suunnan) jonka arvo (eli käyntilaskuri) on nolla
+		//etsii taulukosta sellaisen indeksin (eli suunnan) 
+		//jonka arvo (eli käyntilaskuri) on nolla
 		if (a >= 0) {
 			//jos löytyy 0 tai suurempi indeksi, sijoitetaan
 			suunta = a;
@@ -216,7 +234,8 @@ public class Algoritmi {
 
 		else {
 			int b = Arrays.binarySearch(naapurienLaskurit, 1);
-			//muuten etsii taulukosta sellaisen indeksin (eli suunnan) jonka arvo (eli käyntilaskuri) on yksi
+			//muuten etsii taulukosta sellaisen indeksin (eli suunnan) 
+			//jonka arvo (eli käyntilaskuri) on yksi
 			if (b >= 0) {
 				//jos löytyy 0 tai suurempi indeksi, sijoitetaan
 				suunta = b;
@@ -248,7 +267,8 @@ public class Algoritmi {
 			if (eteneminenSuunnittain[uusisuunta] == false) {
 				teeSuuntaPaatos();
 			}
-			//^testataan vielä voiko uuteen suuntaan edetä, jos ei niin kutsutaan tätä metodia uudestaan (rekursio)
+			//^testataan vielä voiko uuteen suuntaan edetä, 
+			//jos ei niin kutsutaan tätä metodia uudestaan (rekursio)
 			else if (eteneminenSuunnittain[uusisuunta] == true) {
 				return uusisuunta;
 				//^jos voi niin mennään sinne.
