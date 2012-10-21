@@ -1,5 +1,11 @@
 
 public class RobotinMaailma {
+	/**
+	 * Attribuutteihin ainakin:
+	 *	- jonkinlainen tietorakenne, johon ruudut talletetaan
+	 *	- tieto nykyisestä ruudusta
+	 * 
+	 */
 	
 	public static void siirry( int suunta ) {
 		//Muuttaa nykyiseksi ruuduksi annetussa suunnassa olevan naapurin

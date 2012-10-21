@@ -1,5 +1,13 @@
 
 public class RobotinRuutu {
+	/** 
+	 * Attribuutteihin ainakin:
+	 *	- laskuri
+	 *	- tietorakenne, josta voi hakea suunnan avulla, 
+	 *		voiko siihen suuntaan edetä tästä ruudusta
+	 * 
+	 */
+	
 	public int annaLaskurinArvo() {
 		//palauttaa ruudun laskurin arvon
 	}
