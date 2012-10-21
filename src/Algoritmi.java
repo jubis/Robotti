@@ -4,6 +4,16 @@ import java.util.Random;
 public class Algoritmi {
 
 	private Random kone = new Random();
+	
+	
+	/**
+	 * Algoritmi on siis tietoinen robotista, joka sen omistaa
+	 */
+	private final Olo2Robotti robo;
+	
+	public void asetaRobotti( Olo2Robotti robotti ) {
+		this.robo = robotti;
+	}
 
 	/** luottolähteemme
 	 * 
@@ -119,7 +129,7 @@ public class Algoritmi {
 		//ja tallettaa taulukkoon
 		for (suunta = 0; suunta < 4; suunta++) {
 
-			if (robo.sijaintiRuutu.eteneminenSuunnittain[suunta] = true) {
+			if (robo.sijaintiRuutu.voikoSuuntaanEdeta(suunta)) {
 
 				if (RobotinMaailma.annaNaapuri(suunta) == null 
 					&& robo.sijaintiRuutu.voikoSuuntaanEdeta(suunta)) {
