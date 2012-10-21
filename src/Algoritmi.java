@@ -66,13 +66,15 @@ public class Algoritmi {
 		boolean voikoSuuntaanEdeta( int suunta )
 				palauttaa, voiko tästä ruudusta kulkea annettuun suuntaan
 		
-	Tarvittava attribuutti: 
-		
 		RobotinRuutu robo.annaSijaintiruutu()
 		 	OmaRobotissa sijaitseva tieto tämänhetkisestä sijainnista. 
 		 	käyttää	seuraavaa metodia
 
 					RobotinRuutu RobonMaailma.annaRuutu(RobotinRuutu tamaRuutu)
+		
+	Tarvittava attribuutti: 
+		
+		
 												
 
 	algo viittaa robon sijaintiin vain attribuutilla. 
@@ -129,10 +131,10 @@ public class Algoritmi {
 		//ja tallettaa taulukkoon
 		for (suunta = 0; suunta < 4; suunta++) {
 
-			if (robo.sijaintiRuutu.voikoSuuntaanEdeta(suunta)) {
+			if (RobotinMaailma.annaSijainti().voikoSuuntaanEdeta(suunta)) {
 
 				if (RobotinMaailma.annaNaapuri(suunta) == null 
-					&& robo.sijaintiRuutu.voikoSuuntaanEdeta(suunta)) {
+					&& RobotinMaailma.annaSijainti().voikoSuuntaanEdeta(suunta)) {
 
 					//eli jos naapuria ei tunneta (eli siellä ei ole käyty) 
 					//mutta sinne voi edetä, sen laskurin katsotaan olevan 0 
@@ -156,7 +158,7 @@ public class Algoritmi {
 
 
 			}
-			else if (robo.sijaintiRuutu.eteneminenSuunnittain[suunta] == false) {
+			else {
 				naapurienLaskurit[suunta] = 5;
 				//seinää edustaa käyntilaskurin luku 5
 			}
