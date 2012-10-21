@@ -1,20 +1,39 @@
 ﻿Suunnittelemattomia metodeja:
 RobotinMaailma
-	Attribuutteihin jonkinlainen tietorakenne, johon ruudut talletetaan
-
-	public RobotinRuutu annaRuutu( Point sijainti, int suunta )
-		hakee tietorakenteesta oikean ruudun ja palauttaa sen
-		kannattaa hyödyntää oikean pisteen laskemiseen metodia annaNaapuri
+	Attribuutteihin:
+		- jonkinlainen tietorakenne, johon ruudut talletetaan
+		- tieto nykyisestä ruudusta
+	
+	/* ei toistaiseksi tarvita
+	* public RobotinRuutu annaRuutu( Point sijainti, int suunta )
+	* 	hakee tietorakenteesta oikean ruudun ja palauttaa sen
+	*	kannattaa hyödyntää oikean pisteen laskemiseen metodia annaNaapuri
+	*/
+	
+	public static siirry( suunta )
+		Muuttaa nykyiseksi ruuduksi annetussa suunnassa olevan naapurin
 		
-	public Point annaNaapuri( Point keskipiste, int suunta )
-		palauttaa keskipisteestä katsottuna annetussa suunnassa olevan naapurin pisteen
-		
-	public void lisaaLaskuria( Point sijainti )
-		käyttää tallentaa tiedon laskarin lisämisestä oikeaan ruutuun
+	publi static annaSijainti()
+		palauttaa nykyisen ruudun
+	
+	public static RobotinRuutu annaNaapuri( int suunta )
+		Antaa RobonMaailmasta naapuriruudun suunnassa "suunta". 
+		Palauttaa null, jos suunnassa ei ole tunnettua ruutua.
 		
 RobotinRuutu
 	Attribuutteihin ainakin:
-		laskuri
+		- laskuri
+		- tietorakenne, josta voi hakea suunnan avulla, 
+			voiko siihen suuntaan edetä tästä ruudusta
 	
 	public int annaLaskurinArvo()
 		palauttaa ruudun laskurin arvon
+	
+	public void lisaaLaskuria()
+		tallentaa tiedon laskarin lisämisestä oikeaan ruutuun
+		
+	public void asetaVoikoEdeta( int suunta, boolean voikoEdeta )
+		tallentaa ruudun tietoihin, mihin suuntiin tästä ruudusta pääsee
+	
+	boolean voikoSuuntaanEdeta( int suunta )
+		palauttaa, voiko tästä ruudusta kulkea annettuun suuntaan
