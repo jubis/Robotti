@@ -199,7 +199,7 @@ public class Algoritmi {
 		
 		int liikaa;
 
-		for (int i = 0; i > 3; i++) {
+		for (int i = 0; i < 3; i++) {
 
 			if (naapurienLaskurit[i] >= 2) {
 				liikaa++;
