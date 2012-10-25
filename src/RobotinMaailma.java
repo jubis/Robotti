@@ -66,6 +66,11 @@ public class RobotinMaailma {
 	}
 	
 	public static RobotinRuutu annaNaapuri( int suunta ) {
+		/**
+		 * Tämä kannattaa siirtää erilliseen metodiin 
+		 * annaNaapuriPiste(int suunta), joilloin naapuripisteen hakemista
+		 * voi käyttää myös siirry-metodissa
+		 */
 		Point naapuri = nykyinenRuutu;
 		switch(suunta){
 		case Olo2Robotti.POHJOINEN:
