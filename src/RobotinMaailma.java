@@ -61,10 +61,29 @@ public class RobotinMaailma {
 	}
 	
 	public static RobotinRuutu annaSijainti() {
+		return ruudut.get(nykyinenRuutu);
 		//palauttaa nykyisen ruudun
 	}
 	
 	public static RobotinRuutu annaNaapuri( int suunta ) {
+		Point naapuri = nykyinenRuutu;
+		switch(suunta){
+		case Olo2Robotti.POHJOINEN:
+			naapuri.translate(0, 1);
+			break;
+		case Olo2Robotti.ITA:
+			naapuri.translate(1, 0);
+			break;
+		case Olo2Robotti.ETELA:
+			naapuri.translate(0, -1);
+			break;
+		case Olo2Robotti.LANSI:
+			naapuri.translate(-1, 0);
+			break;
+		default:
+			return null;
+		}
+		return ruudut.get(naapuri);
 		/**
 		 * tallennetaan nykyinenSijainti apumuuttujaan
 		 * 
