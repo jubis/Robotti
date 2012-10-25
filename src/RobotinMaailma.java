@@ -10,20 +10,14 @@ public class RobotinMaailma {
 	 *	- tieto nykyisestä ruudusta
 	 * 
 	 */
+	private static Map <Point, RobotinRuutu> ruudut=
+			new HashMap <Point,RobotinRuutu>();
 	
-	// Luo ja alusta Map<Point, RobotinRuutu> tässä
-	private static Map <Point, RobotinRuutu> ruudut;
-	
-	
-	private static Point edellinenRuutu;
 	private static Point nykyinenRuutu;
-	private static Point uusiRuutu;
+
 	
 	
-	public static void siirry( int suunta ) {
-		// et halua alustaa Mappia tässä enää uudestaan
-		ruudut=new HashMap <Point,RobotinRuutu>(); 
-		
+	public static void siirry( int suunta ) {	
 		/**
 		 * Tässä kohdassa pitää laskea, mikä uusiRuutu on.
 		 * Siinä kannattaa ensin muuttaa nykyistäRuutua Point-olion 
@@ -31,11 +25,27 @@ public class RobotinMaailma {
 		 * lopuksi laittaa apumuuttujan arvo uudenRuudun arvoksi.
 		 */
 		
-		/*** Tässä esimerkki ***/
+		Point uusiRuutu = nykyinenRuutu;
+		switch (suunta){
+		case 0:
+			annaNaapuriPiste(0);
+			break;
+		case 1:
+			annaNaapuriPiste(1);
+			break;
+		case 2:
+			annaNaapuriPiste(2);
+			break;
+		case 3:
+			annaNaapuriPiste(3);
+			break;
+		}
+		
+		/*** Tässä esimerkki **
 		Point piste = new Point(4,5);
 		if( suunta == Olo2Robotti.ITA ) {
-			piste.translate( 1, 0 );
-		}
+		//	piste.translate( 1, 0 );
+		//}
 		/*** Esimerkki loppuu ***/
 		
 		
@@ -50,12 +60,11 @@ public class RobotinMaailma {
 		if (ruudut.containsValue(uusiRuutu)){
 			ruudut.get(uusiRuutu);
 		}else {
-			// tähän voit (kysymysmerkkien tilalle) luoda vaan uuden olion
-			// RobotinRuudusta
-			ruudut.put(uusiRuutu,???);
+			ruudut.put(uusiRuutu, new RobotinRuutu());
 		}
-		uusiRuutu=nykyinenRuutu; //pitäiskö tän olla toisin päin
-
+		System.out.println(nykyinenRuutu);
+		nykyinenRuutu=uusiRuutu;
+		System.out.println(nykyinenRuutu);
 		//Muuttaa nykyiseksi ruuduksi sen ruudun, johon siirrytään
 		//*Huom* Tarvittaessa luo uuden ruudun, jos paikalla ei vielä ole sitä
 	}
@@ -65,12 +74,7 @@ public class RobotinMaailma {
 		//palauttaa nykyisen ruudun
 	}
 	
-	public static RobotinRuutu annaNaapuri( int suunta ) {
-		/**
-		 * Tämä kannattaa siirtää erilliseen metodiin 
-		 * annaNaapuriPiste(int suunta), joilloin naapuripisteen hakemista
-		 * voi käyttää myös siirry-metodissa
-		 */
+	public static Point annaNaapuriPiste (int suunta) {
 		Point naapuri = nykyinenRuutu;
 		switch(suunta){
 		case Olo2Robotti.POHJOINEN:
@@ -87,8 +91,14 @@ public class RobotinMaailma {
 			break;
 		default:
 			return null;
-		}
-		return ruudut.get(naapuri);
+		}	
+		return naapuri;
+	}	
+		
+	
+	
+	public static RobotinRuutu annaNaapuri( int suunta ) {
+		return ruudut.get(annaNaapuriPiste(suunta));
 		/**
 		 * tallennetaan nykyinenSijainti apumuuttujaan
 		 * 
