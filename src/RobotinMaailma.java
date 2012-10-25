@@ -4,30 +4,24 @@ import java.util.Map;
 
 
 public class RobotinMaailma {
-	/**
-	 * Attribuutteihin ainakin:
-	 *	- jonkinlainen tietorakenne, johon ruudut talletetaan
-	 *	- tieto nykyisestä ruudusta
-	 * 
-	 */
-	private static Map <Point, RobotinRuutu> ruudut=
+	private static Map <Point, RobotinRuutu> ruudut = 
 			new HashMap <Point,RobotinRuutu>();
-	
 	private static Point nykyinenRuutu;
 
 	
 	
-	public static void siirry( int suunta ) {	
-		/**
-		 * Tässä kohdassa pitää laskea, mikä uusiRuutu on.
-		 * Siinä kannattaa ensin muuttaa nykyistäRuutua Point-olion 
-		 * translate-metodin avulla ja 
-		 * lopuksi laittaa apumuuttujan arvo uudenRuudun arvoksi.
-		 */
-		
+	public static void siirry( int suunta ) {			
 		Point uusiRuutu = nykyinenRuutu;
+		
+		/**
+		 * Tähän ei tarvitse switch rakennetta, koska 
+		 * tapauksessa 0 parametri on 0, tapauksessa 1 parametri on 1 jne.
+		 * eli muuttujan suunta voi suoraan antaa metodikutsuksi
+		 */
 		switch (suunta){
 		case 0:
+			//mihin tätä metodikutsua käytetään
+			//tai pitäisikö arvo tallentaa johonkin?
 			annaNaapuriPiste(0);
 			break;
 		case 1:
@@ -41,30 +35,21 @@ public class RobotinMaailma {
 			break;
 		}
 		
-		/*** Tässä esimerkki **
-		Point piste = new Point(4,5);
-		if( suunta == Olo2Robotti.ITA ) {
-		//	piste.translate( 1, 0 );
-		//}
-		/*** Esimerkki loppuu ***/
-		
-		
 		/**
-		 * suunta-parametrin arvoilla voi tutkia suuntaa näin
-		 * 
-		 * suunta == Olo2Robotti.ITA tai
-		 * suunta == Olo2Robotti.LANSI
-		 * 
+		 * uusiRuutu on Point-tyyppinen ja ruudut-mapissa 
+		 * Point on avain eikä arvo
+		 * Ei voi siis käyttää metodia containsValue, 
+		 * koska uusiRuutu ei ole arvo
 		 */
-		
 		if (ruudut.containsValue(uusiRuutu)){
-			ruudut.get(uusiRuutu);
+			ruudut.get(uusiRuutu);//mihin tässä haettua arvoa käytetään?
 		}else {
 			ruudut.put(uusiRuutu, new RobotinRuutu());
 		}
 		System.out.println(nykyinenRuutu);
-		nykyinenRuutu=uusiRuutu;
+		nykyinenRuutu = uusiRuutu;
 		System.out.println(nykyinenRuutu);
+		
 		//Muuttaa nykyiseksi ruuduksi sen ruudun, johon siirrytään
 		//*Huom* Tarvittaessa luo uuden ruudun, jos paikalla ei vielä ole sitä
 	}
@@ -99,17 +84,6 @@ public class RobotinMaailma {
 	
 	public static RobotinRuutu annaNaapuri( int suunta ) {
 		return ruudut.get(annaNaapuriPiste(suunta));
-		/**
-		 * tallennetaan nykyinenSijainti apumuuttujaan
-		 * 
-		 * Switch-lauseella käydään kaikki suunta-muuttujan arvot läpi
-		 * siis Olo2Robobtti.ITA jne
-		 * 
-		 * siirretään apumuuttujaa oikeeseen suuntaan
-		 * 
-		 * haetaan apumuuttujan avulla ruudut-mapista oikea RobotinRuutu
-		 * ja palautetaan se
-		 */
 		
 		//Antaa RobonMaailmasta naapuriruudun suunnassa "suunta". 
 		//Palauttaa null, jos suunnassa ei ole tunnettua ruutua.
