@@ -31,6 +31,14 @@ public class RobotinMaailma {
 		 * lopuksi laittaa apumuuttujan arvo uudenRuudun arvoksi.
 		 */
 		
+		/*** Tässä esimerkki ***/
+		Point piste = new Point(4,5);
+		if( suunta == Olo2Robotti.ITA ) {
+			piste.translate( 1, 0 );
+		}
+		/*** Esimerkki loppuu ***/
+		
+		
 		/**
 		 * suunta-parametrin arvoilla voi tutkia suuntaa näin
 		 * 
@@ -53,12 +61,21 @@ public class RobotinMaailma {
 	}
 	
 	public static RobotinRuutu annaSijainti() {
-	
 		//palauttaa nykyisen ruudun
 	}
 	
 	public static RobotinRuutu annaNaapuri( int suunta ) {
-
+		/**
+		 * tallennetaan nykyinenSijainti apumuuttujaan
+		 * 
+		 * Switch-lauseella käydään kaikki suunta-muuttujan arvot läpi
+		 * siis Olo2Robobtti.ITA jne
+		 * 
+		 * siirretään apumuuttujaa oikeeseen suuntaan
+		 * 
+		 * haetaan apumuuttujan avulla ruudut-mapista oikea RobotinRuutu
+		 * ja palautetaan se
+		 */
 		
 		//Antaa RobonMaailmasta naapuriruudun suunnassa "suunta". 
 		//Palauttaa null, jos suunnassa ei ole tunnettua ruutua.
