@@ -12,43 +12,12 @@ public class RobotinMaailma {
 	
 	public static void siirry( int suunta ) {			
 		Point uusiRuutu = nykyinenRuutu;
+		ruudut.get(annaNaapuriPiste(suunta));
 		
-		/**
-		 * Tähän ei tarvitse switch rakennetta, koska 
-		 * tapauksessa 0 parametri on 0, tapauksessa 1 parametri on 1 jne.
-		 * eli muuttujan suunta voi suoraan antaa metodikutsuksi
-		 */
-		switch (suunta){
-		case 0:
-			//mihin tätä metodikutsua käytetään
-			//tai pitäisikö arvo tallentaa johonkin?
-			annaNaapuriPiste(0);
-			break;
-		case 1:
-			annaNaapuriPiste(1);
-			break;
-		case 2:
-			annaNaapuriPiste(2);
-			break;
-		case 3:
-			annaNaapuriPiste(3);
-			break;
-		}
-		
-		/**
-		 * uusiRuutu on Point-tyyppinen ja ruudut-mapissa 
-		 * Point on avain eikä arvo
-		 * Ei voi siis käyttää metodia containsValue, 
-		 * koska uusiRuutu ei ole arvo
-		 */
-		if (ruudut.containsValue(uusiRuutu)){
-			ruudut.get(uusiRuutu);//mihin tässä haettua arvoa käytetään?
-		}else {
+		if (!ruudut.containsKey(uusiRuutu)){
 			ruudut.put(uusiRuutu, new RobotinRuutu());
 		}
-		System.out.println(nykyinenRuutu);
 		nykyinenRuutu = uusiRuutu;
-		System.out.println(nykyinenRuutu);
 		
 		//Muuttaa nykyiseksi ruuduksi sen ruudun, johon siirrytään
 		//*Huom* Tarvittaessa luo uuden ruudun, jos paikalla ei vielä ole sitä
