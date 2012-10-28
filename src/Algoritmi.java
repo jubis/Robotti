@@ -79,8 +79,7 @@ Johannes 28.10: Ei tarvita tällä hetkellä koska naapurienLaskurit[] käytetä
 		void RobotinRuutu.asetaVoikoEdeta( int suunta, boolean voikoEdeta )
 				tallentaa ruudun tietoihin, mihin suuntiin tästä ruudusta pääsee
 		
-Johannes 28.10: ei tarvita. naapurienLaskurit[] tallentaa tämän tiedon jo
-		
+Johannes 28.10: en ole varma
 		
 		boolean voikoSuuntaanEdeta( int suunta )
 				palauttaa, voiko tästä ruudusta kulkea annettuun suuntaan
