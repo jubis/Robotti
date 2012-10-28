@@ -211,30 +211,40 @@ public class Algoritmi {
 		//tämä metodi antaa suunnan, joka on eri kuin parametri. 
 	}
 
+	public int haeArvo (int[] taulukko, int arvo) {
+		int indeksi;
+	    for(indeksi = 0; 
+	    		indeksi < taulukko.length; 
+	    		indeksi++) 
+	         
+	    	if(taulukko[indeksi] == arvo)
+	             return indeksi;
+		return indeksi;
+	}
+	
 	public int teeSuuntaPaatos() {
-		int suunta = 0;
+		int suunta = -1;
+		int a = -1; 
 		
-		//haetaan naapurien käyntilaskurit suoraan ruudulta
-
-		int a = Arrays.binarySearch(RobotinMaailma.annaSijainti().naapurienLaskurit, 0);
-		//etsii taulukosta sellaisen indeksin (eli suunnan) 
-		//jonka arvo (eli käyntilaskuri) on nolla
+		a = haeArvo(RobotinMaailma
+			.annaSijainti()
+			.naapurienLaskurit, 0);
+	
 		if (a >= 0) {
-			//jos löytyy 0 tai suurempi indeksi, sijoitetaan
 			suunta = a;
 		}
 
-		else {
-			int b = Arrays.binarySearch(RobotinMaailma.annaSijainti().naapurienLaskurit, 1);
-			//muuten etsii taulukosta sellaisen indeksin (eli suunnan) 
-			//jonka arvo (eli käyntilaskuri) on yksi
-			if (b >= 0) {
-				//jos löytyy 0 tai suurempi indeksi, sijoitetaan
-				suunta = b;
+		else { 
+			a = haeArvo(RobotinMaailma
+				.annaSijainti()
+				.naapurienLaskurit, 1); 
+			if (a >= 0) {
+				suunta = a;
 			}
 		}
-
-		//binarySearch siis palauttaa negatiivisen luvun jos se ei löydä mitään.
+		
+		//^tämä siis palauttaa negatiivisen luvun jos se ei löydä mitään.
+		//0-arvoista suuntaa suositaan.
 		//Jos 0- tai 1- arvoisia ei löydy yhtäkään, ollaan maalissa tai kusessa.
 		
 		if (onkoUmpikuja() == false
@@ -256,10 +266,7 @@ public class Algoritmi {
 			kts. Tremaux:n algoritmin idea.
 			
 			*/
-			
-			
-			
-		
+					
 			if (! RobotinMaailma.annaSijainti().voikoSuuntaanEdeta( uusiSuunta )) {
 				teeSuuntaPaatos();
 			}
@@ -273,34 +280,7 @@ public class Algoritmi {
 	
 		return suunta;
 
-	/**
-		 * binäärihaku palauttaa negatiivisen luvun, jos se ei löytänyt mitään
-		 * jos se löysi, se palauttaa _muistaakseni_ ensimmäisen täsmäävän
-		 * alkion indeksin
-		 * kts. Java API
-		 * -Matias
-		 * 
-		 * Muokattu - Johannes
-		 * 
-		 * API sanoo näin:
-		 * 
-		 * Note that this guarantees that the return value will be >= 0 if and only if the key is found.
-		 * 
-		 * 			otettu huomioon
-		 * 
-		 * The array must be sorted (as by the sort method, above) prior to making this call. 
-		 * If it is not sorted, the results are undefined.
-		 * 
-		 * 			mutta onko tämä paha? sorttaus tuhoaisi informaation.
-		 * 
-		 * If the array contains multiple elements with the specified value, 
-		 * there is no guarantee which one will be found.
-		 * 
-		 * 			tämä ei kai haittaa, satunnainen sen pitäisi kai ollakin
-		 * 
-		 * 
-		 * Johannes 28.10.
-		 */
+
 	}
 
 
