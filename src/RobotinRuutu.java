@@ -27,7 +27,8 @@ public class RobotinRuutu {
 		//tallentaa ruudun tietoihin, mihin suuntiin tästä ruudusta pääsee
 	}
 	
-	boolean voikoSuuntaanEdeta( int suunta ) {
+	public boolean voikoSuuntaanEdeta( int suunta ) {
+		return false;
 		//palauttaa, voiko tästä ruudusta kulkea annettuun suuntaa
 	}
 }
