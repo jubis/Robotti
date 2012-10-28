@@ -72,8 +72,7 @@ Johannes 28.10: ei tarvita, jos algo voi saada naapurit suoraan R-Maailmalta kut
 		int RobotinRuutu.annaLaskurinArvo()				
 				antaa laskurin arvon
 		
-Johannes 28.10: Ei tarvita tällä hetkellä koska naapurienLaskurit[] käytetään attribuuttina. 
-						Ehkä tarvitaan vielä.
+Johannes 28.10: tarvitaan
 		
 		
 		void RobotinRuutu.asetaVoikoEdeta( int suunta, boolean voikoEdeta )
