@@ -12,18 +12,7 @@ public class Algoritmi {
 	
 	/**
 	 * Algoritmi on siis tietoinen robotista, joka sen omistaa
-	 
-		
-		private final Olo2Robotti robo;
-		
-		public void asetaRobotti( Olo2Robotti robotti ) {
-			this.robo = robotti;
-		}
-	
-	Johannes 28.10: tämä ei olekaan tarpeellinen, jos algo nyt toimii.
-	algon viittaukset tehdään RobotinMaailman kautta.
-	
-	
+
 	*/
 	
 	
@@ -70,25 +59,18 @@ public class Algoritmi {
 				antaa RobonMaailmasta naapuriruudun suunnassa "suunta". 
 				Algoritmi huomioi sen jos ruutua ei vielä RobonMaailmassa ole.
 				
-Johannes 28.10: ei tarvita, jos algo voi saada naapurit suoraan R-Maailmalta kuten nyt
-		
-		
+				
 		int RobotinRuutu.annaLaskurinArvo()				
 				antaa laskurin arvon
-		
-Johannes 28.10: tarvitaan
-		
+				
 		
 		void RobotinRuutu.asetaVoikoEdeta( int suunta, boolean voikoEdeta )
 				tallentaa ruudun tietoihin, mihin suuntiin tästä ruudusta pääsee
 		
-Johannes 28.10: en ole varma
-		
+
 		boolean voikoSuuntaanEdeta( int suunta )
 				palauttaa, voiko tästä ruudusta kulkea annettuun suuntaan
-		
-Johannes 28.10: tarvitaan vielä.
-		
+				
 		
 		RobotinRuutu robo.annaSijaintiruutu()
 		 	OmaRobotissa sijaitseva tieto tämänhetkisestä sijainnista. 
@@ -96,10 +78,26 @@ Johannes 28.10: tarvitaan vielä.
 
 					RobotinRuutu RobonMaailma.annaRuutu(RobotinRuutu tamaRuutu)
 
-Johannes 28.10: on näköjään jo toteutettu RobotinMaailmaan, ei tarvita enää
 */
 	
 	
+	
+		
+		public void pyorahda() {
+			//Tämä metodi tutkii naapurustostaan mihin suuntiin voi mennä.
+	
+	
+	
+			for (int i = 0; i < 4; i++) {
+	
+				RobotinRuutu.asetaVoikoEdeta( robo.annaSuunta(), 
+				                              robo.voiEdeta() ); 
+				robo.kaannyOikealle();	
+				//nämä metodit peritään Robotti- luokalta, siksi herjaa
+			}
+	
+		}
+
 	
 	public void tutkaile() {
 		int suunta;
