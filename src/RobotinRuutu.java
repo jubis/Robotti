@@ -1,5 +1,6 @@
-
 public class RobotinRuutu {
+	
+	private int laskuri;
 	/** 
 	 * Attribuutteihin ainakin:
 	 *	- laskuri
@@ -13,10 +14,12 @@ public class RobotinRuutu {
 	
 	
 	public int annaLaskurinArvo() {
+		return this.laskuri;
 		//palauttaa ruudun laskurin arvon
 	}
 	
 	public void lisaaLaskuria() {
+		this.laskuri == this.laskuri++;
 		//tallentaa tiedon laskarin lisämisestä oikeaan ruutuun
 	}
 	
