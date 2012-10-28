@@ -6,13 +6,15 @@ import java.util.Map;
 public class RobotinMaailma {
 	private static Map <Point, RobotinRuutu> ruudut = 
 			new HashMap <Point,RobotinRuutu>();
-	private static Point nykyinenRuutu;
+	private static Point nykyinenRuutu = new Point( 0, 0 );
 
-	
+	public static void alusta() {
+		RobotinMaailma.ruudut.put( RobotinMaailma.nykyinenRuutu, 
+		                           new RobotinRuutu() );
+	}
 	
 	public static void siirry( int suunta ) {			
-		Point uusiRuutu = nykyinenRuutu;
-		ruudut.get(annaNaapuriPiste(suunta));
+		Point uusiRuutu = annaNaapuriPiste(suunta);
 		
 		if (!ruudut.containsKey(uusiRuutu)){
 			ruudut.put(uusiRuutu, new RobotinRuutu());
@@ -58,6 +60,8 @@ public class RobotinMaailma {
 		//Palauttaa null, jos suunnassa ei ole tunnettua ruutua.
 	}
 	
-	
+	public static void main( String[] args ) {
+		System.out.println( RobotinMaailma.annaSijainti() );
+	}
 	
 }
