@@ -19,7 +19,7 @@ public class RobotinRuutu {
 	}
 	
 	public void lisaaLaskuria() {
-		this.laskuri == this.laskuri++;
+		this.laskuri++;
 		//tallentaa tiedon laskarin lisämisestä oikeaan ruutuun
 	}
 	
