@@ -4,7 +4,11 @@ import java.util.Random;
 public class Algoritmi {
 
 	private Random kone = new Random();
-	
+	private Olo2Robotti robo = null;
+
+	public Algoritmi( Olo2Robotti robo ) {
+		this.robo = robo;
+	}
 	
 	/**
 	 * Algoritmi on siis tietoinen robotista, joka sen omistaa
@@ -147,7 +151,7 @@ Johannes 28.10: on näköjään jo toteutettu RobotinMaailmaan, ei tarvita enä�
 	public int annaNaapurienMaara(RobotinRuutu keskiRuutu) {
 		int naapurit = 0;
 		for (int a = 0; a < 3; a++) { 
-			if (keskiRuutu.voikoSuuntaanEdeta( a )) {
+			if (robo.voikoSuuntaanEdeta( a )) {
 				naapurit++;
 			}
 		}
@@ -200,15 +204,13 @@ Johannes 28.10: on näköjään jo toteutettu RobotinMaailmaan, ei tarvita enä�
 
 
 	public int arvoEriSuunta(int nytsuunta) {
-		int ulossuunta = kone.nextInt(4);
+		int ulossuunta;
+		do {
+			ulossuunta = kone.nextInt(4);
+		} while(ulossuunta == nytsuunta);
 		
-		if (ulossuunta == nytsuunta) {
-			return arvoEriSuunta(nytsuunta);
-			}
-		
-		else return ulossuunta;
+		return ulossuunta;
 		//tämä metodi antaa suunnan, joka on eri kuin parametri. 
-		//sisältää kivan rekursion.
 	}
 
 	public int teeSuuntaPaatos() {
