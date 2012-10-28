@@ -8,4 +8,10 @@
  */
 public class Robotti {
 	public boolean etene() {return true;}
+	
+	public void kaannyVasemmalle() {}
+	
+	public int annaSuunta() { return 0; }
+	
+	public boolean voiEdeta() { return false; }
 }
