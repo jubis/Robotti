@@ -8,13 +8,21 @@ public class Algoritmi {
 	
 	/**
 	 * Algoritmi on siis tietoinen robotista, joka sen omistaa
-	 */
-	private final Olo2Robotti robo;
+	 
+		
+		private final Olo2Robotti robo;
+		
+		public void asetaRobotti( Olo2Robotti robotti ) {
+			this.robo = robotti;
+		}
 	
-	public void asetaRobotti( Olo2Robotti robotti ) {
-		this.robo = robotti;
-	}
-
+	Johannes 28.10: tämä ei olekaan tarpeellinen, jos algo nyt toimii.
+	algon viittaukset tehdään RobotinMaailman kautta.
+	
+	
+	*/
+	
+	
 	/** luottolähteemme
 	 * 
 	http://www.astrolog.org/labyrnth/algrithm.htm
@@ -51,87 +59,54 @@ public class Algoritmi {
 	 *  boolean etene()
 	*/
 	
+	
 	/**tarvittavat metodit:
 	
 		RobotinRuutu RobotinMaailma.annaNaapuri(int suunta)		
 				antaa RobonMaailmasta naapuriruudun suunnassa "suunta". 
 				Algoritmi huomioi sen jos ruutua ei vielä RobonMaailmassa ole.
+				
+Johannes 28.10: ei tarvita, jos algo voi saada naapurit suoraan R-Maailmalta kuten nyt
+		
 		
 		int RobotinRuutu.annaLaskurinArvo()				
 				antaa laskurin arvon
 		
+Johannes 28.10: Ei tarvita tällä hetkellä koska naapurienLaskurit[] käytetään attribuuttina. 
+						Ehkä tarvitaan vielä.
+		
+		
 		void RobotinRuutu.asetaVoikoEdeta( int suunta, boolean voikoEdeta )
 				tallentaa ruudun tietoihin, mihin suuntiin tästä ruudusta pääsee
 		
+Johannes 28.10: ei tarvita. naapurienLaskurit[] tallentaa tämän tiedon jo
+		
+		
 		boolean voikoSuuntaanEdeta( int suunta )
 				palauttaa, voiko tästä ruudusta kulkea annettuun suuntaan
+		
+Johannes 28.10: tarvitaan vielä.
+		
 		
 		RobotinRuutu robo.annaSijaintiruutu()
 		 	OmaRobotissa sijaitseva tieto tämänhetkisestä sijainnista. 
 		 	käyttää	seuraavaa metodia
 
 					RobotinRuutu RobonMaailma.annaRuutu(RobotinRuutu tamaRuutu)
-		
-	Tarvittava attribuutti: 
-		
-		
-												
 
-	algo viittaa robon sijaintiin vain attribuutilla. 
-	*/
-	
-	
-	/** alla vielä luokan vaatimia mitkä varmaankin kuuluvat muualle:
-	*/
-	/*
-	private RobotinRuutu edellinenRuutu; 
-	//^ tämä kuuluu ehkä RobonMaailmalle -Johannes
-	
-	robo.RobotinRuutu.lisaaLaskuria(this.tamaRuutu);
-	//^ RobotinRuudulla tai RobotinMaailmassa on käyntilaskuri jota kasvatetaan 
-	//aina kun ko. ruutuun mennään. luokka oikeastaan ei käytä tätä suoraan.
-	
-	int[] naapurienLaskurit = new int[4];
-	//^tämä taulukko voisi olla RobotinRuudussa. Käyttäjä on tämän luokan 
-	//tutkaile()-metodi.
-	
-	//robotissa tehdään esim. seuraava temppu: 
-		//edellinenruutu = nykyinenruutu
-		//nykyinenruutu = uusiruutu 
-		//-Johannes
-	
-	*/
-
-
-	
-	
-
-
-
-/**
- * Tämä metodi saattaa olla täysin turha
-	
-	public void pyorahda() {
-		//Tämä metodi tutkii naapurustostaan mihin suuntiin voi mennä.
-
-
-
-		for (int i = 0; i < 4; i++) {
-
-			RobotinRuutu.asetaVoikoEdeta( robo.annaSuunta(), 
-			                              robo.voiEdeta() ); 
-			robo.kaannyOikealle();	
-
-		}
-
-	}
+Johannes 28.10: on näköjään jo toteutettu RobotinMaailmaan, ei tarvita enää
 */
 	
 	
 	
 	public void tutkaile() {
 		int suunta;
-
+		/*
+		 muutos 28.10:	ei palauta mitään, metodit
+		 				käyttävät taulukkoa RobotinRuudusta
+		 */
+		
+		
 		//alla on for-lause joka käy kaikki ilmansuunnat läpi 
 		//ja tallettaa taulukkoon
 		for (suunta = 0; suunta < 4; suunta++) {
@@ -143,12 +118,7 @@ public class Algoritmi {
 
 					//eli jos naapuria ei tunneta (eli siellä ei ole käyty) 
 					//mutta sinne voi edetä, sen laskurin katsotaan olevan 0 
-					//vaatii metodin RobotinMaailma.annaNaapuri(suunta)
-	
-					/**
-					 * sijaintiRuutu tai vast. attribuutti tarvitaan robolle. 
-					 * kts. alussa.
-					*/
+					
 
 					RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] = 0;
 
@@ -171,11 +141,7 @@ public class Algoritmi {
 		//palautetaan taulukko, jossa indeksi (0-3) 
 		//on ilmansuunta ja sen arvo on naapuriruudun laskurin arvo
 		
-		/*
-		 * return naapurienLaskurit; 
-		 muutos 28.10: ei palautetakaan mitään, metodit
-		 käyttävät taulukkoa RobotinRuudusta
-		 */
+
 	}
 
 
@@ -197,6 +163,7 @@ public class Algoritmi {
 			return true;
 		}
 		else return false;
+		
 		// käyttää naapurimäärälaskuria määrittäessään, 
 		// onko parametriruutu risteys
 		// risteys <=> yli 2 naapuria
@@ -204,9 +171,10 @@ public class Algoritmi {
 
 	public boolean onkoUmpikuja() {
 		
-		/*muutos 28.10:
-		*käytetään taulukkoa suoraan ruudusta
-		*/
+		/*muutos 28.10: käytetään taulukkoa suoraan ruudusta
+		 */
+		 
+		
 				
 		int suunnassaOnLiikaaKaynteja = 0;
 
@@ -277,14 +245,18 @@ public class Algoritmi {
 		
 			int uusiSuunta = arvoEriSuunta(suunta);
 			
-			/**jos ruutu jossa ollaan nyt EI ole umpikuja (kts. umpikujametodi)
-			*JA
-			*"suunta"-muuttujaan sijoitetussa suunnassa on ruutu joka on risteys 
-			*JA
-			*tuon risteyksen laskurin arvo on 1
-			*arvotaan uusi suunta joka on eri kuin nykyinen.
-			*
-			*kts. Tremaux:n algoritmin idea.
+			/**
+			
+			jos ruutu jossa ollaan nyt EI ole umpikuja (kts. umpikujametodi)
+			JA
+			"suunta"-muuttujaan sijoitetussa suunnassa on ruutu joka on risteys 
+			JA
+			tuon risteyksen laskurin arvo on 1
+			
+			-> arvotaan uusi suunta joka on eri kuin nykyinen.
+			
+			kts. Tremaux:n algoritmin idea.
+			
 			*/
 			
 			
@@ -311,6 +283,25 @@ public class Algoritmi {
 		 * -Matias
 		 * 
 		 * Muokattu - Johannes
+		 * 
+		 * API sanoo näin:
+		 * 
+		 * Note that this guarantees that the return value will be >= 0 if and only if the key is found.
+		 * 
+		 * 			otettu huomioon
+		 * 
+		 * The array must be sorted (as by the sort method, above) prior to making this call. 
+		 * If it is not sorted, the results are undefined.
+		 * 
+		 * 			mutta onko tämä paha? sorttaus tuhoaisi informaation.
+		 * 
+		 * If the array contains multiple elements with the specified value, 
+		 * there is no guarantee which one will be found.
+		 * 
+		 * 			tämä ei kai haittaa, satunnainen sen pitäisi kai ollakin
+		 * 
+		 * 
+		 * Johannes 28.10.
 		 */
 	}
 
