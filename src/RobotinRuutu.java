@@ -8,6 +8,10 @@ public class RobotinRuutu {
 	 * 
 	 */
 	
+	public int[] naapurienLaskurit = new int[4];
+	
+	
+	
 	public int annaLaskurinArvo() {
 		//palauttaa ruudun laskurin arvon
 	}
