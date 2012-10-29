@@ -11,6 +11,7 @@ public class RobotinMaailma {
 	public static void alusta() {
 		RobotinMaailma.ruudut.put( RobotinMaailma.nykyinenRuutu, 
 		                           new RobotinRuutu() );
+		RobotinMaailma.ruudut.get( nykyinenRuutu ).lisaaLaskuria();
 	}
 	
 	public static void siirry( int suunta ) {			
@@ -20,6 +21,8 @@ public class RobotinMaailma {
 			ruudut.put(uusiRuutu, new RobotinRuutu());
 		}
 		nykyinenRuutu = uusiRuutu;
+		
+		RobotinMaailma.ruudut.get( nykyinenRuutu ).lisaaLaskuria();
 		
 		//Muuttaa nykyiseksi ruuduksi sen ruudun, johon siirrytään
 		//*Huom* Tarvittaessa luo uuden ruudun, jos paikalla ei vielä ole sitä

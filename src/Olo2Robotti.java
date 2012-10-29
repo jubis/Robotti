@@ -18,8 +18,19 @@ public class Olo2Robotti extends Robotti {
 		}
 		return this.voiEdeta();
 	}
+	
+	public void pyorahda() {
+		//Tämä metodi tutkii naapurustostaan mihin suuntiin voi mennä.
+		for (int i = 0; i < 4; i++) {
+			RobotinMaailma.annaSijainti().asetaVoikoEdeta( this.annaSuunta(), 
+			                                               this.voiEdeta() ); 
+			this.kaannyOikealle();	
+		}
+	}
 
 	public void teeSiirto() {
+		this.pyorahda();
+		alg.tutkaile();
 		int suunta = alg.teeSuuntaPaatos();
 		
 		while( this.annaSuunta() != suunta ) {
@@ -38,6 +49,8 @@ public class Olo2Robotti extends Robotti {
 		while(true) {
 			robo.teeSiirto();
 		}
+		//Turnaus turnaus = new Turnaus();
+		//turnaus.run;
 		
 	}
 }

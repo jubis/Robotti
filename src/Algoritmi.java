@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Random;
 
 public class Algoritmi {
@@ -10,128 +9,29 @@ public class Algoritmi {
 		this.robo = robo;
 	}
 
-	/**
-	 * Algoritmi on siis tietoinen robotista, joka sen omistaa
-
-	 */
-
-
-	/** luottolähteemme
-	 * 
-	http://www.astrolog.org/labyrnth/algrithm.htm
-	http://en.wikipedia.org/wiki/Maze_solving_algorithm
-
-	 */
-
-	/**
-	 * 
-	 * Koodin oletukset: 
-	 * 1. on olemassa RobotinMaailma.java, jonne talletetaan ruudut joissa on 
-	 * 		käyty ja niiden tiedot.
-	 * 2. on olemassa RobotinRuutu.java jonka oliot kootaan robotin keräämien 
-	 * 		tietojen pohjalta ja lisätään RobotinMaailmaan.
-	 * 3. on olemassa OmaRobotti.java (vast) joka käyttää tämän luokan metodeja 
-	 * 		(tai metodeja siirretään sinne, miten vain on järkevää).
-	 * 4. OmaRobotti perii valmiin Robotti-luokan.
-	 * 
-	 * koodissa "robo" tarkoittaa OmaRobotti-oliota.
-	 *
-	 * tämä algoritmi on siis kaikki mitä tehdään ennen askelta
-	 * ts. robotin päätöksentekoprosessi.
-	 *  -Johannes
-	 */ 
-
-
-	/**
-	 * Robotti-luokkahan tarjoaa meille valmiiksi seuraavat: 
-	 *  int annaSuunta()
-	 *  Ruutu annaSijainti()
-	 *  void kaannyVasemmalle()
-	 *  void kaannyOikealle()
-	 *  boolean voiEdeta()
-	 *  boolean etene()
-	 */
-
-
-	/**tarvittavat metodit:
-
-		RobotinRuutu RobotinMaailma.annaNaapuri(int suunta)		
-				antaa RobonMaailmasta naapuriruudun suunnassa "suunta". 
-				Algoritmi huomioi sen jos ruutua ei vielä RobonMaailmassa ole.
-
-
-		int RobotinRuutu.annaLaskurinArvo()				
-				antaa laskurin arvon
-
-
-		void RobotinRuutu.asetaVoikoEdeta( int suunta, boolean voikoEdeta )
-				tallentaa ruudun tietoihin, mihin suuntiin tästä ruudusta pääsee
-
-
-		boolean voikoSuuntaanEdeta( int suunta )
-				palauttaa, voiko tästä ruudusta kulkea annettuun suuntaan
-
-
-		RobotinRuutu robo.annaSijaintiruutu()
-		 	OmaRobotissa sijaitseva tieto tämänhetkisestä sijainnista. 
-		 	käyttää	seuraavaa metodia
-
-					RobotinRuutu RobonMaailma.annaRuutu(RobotinRuutu tamaRuutu)
-
-	 */
-
-
-
-
-	public void pyorahda() {
-		//Tämä metodi tutkii naapurustostaan mihin suuntiin voi mennä.
-
-
-
-		for (int i = 0; i < 4; i++) {
-
-			RobotinRuutu.asetaVoikoEdeta( robo.annaSuunta(), 
-					robo.voiEdeta() ); 
-			robo.kaannyOikealle();	
-			//nämä metodit peritään Robotti- luokalta, siksi herjaa
-		}
-
-	}
-
 
 	public void tutkaile() {
-		int suunta;
-		/*
-		 muutos 28.10:	ei palauta mitään, metodit
-		 				käyttävät taulukkoa RobotinRuudusta
-		 */
-
-
+		int suunta = 0;
 		//alla on for-lause joka käy kaikki ilmansuunnat läpi 
 		//ja tallettaa taulukkoon
 		for (suunta = 0; suunta < 4; suunta++) {
 
 			if (RobotinMaailma.annaSijainti().voikoSuuntaanEdeta(suunta)) {
-
-				if (RobotinMaailma.annaNaapuri(suunta) == null 
-						&& RobotinMaailma.annaSijainti().voikoSuuntaanEdeta(suunta)) {
-
+				
+				System.out.println( RobotinMaailma.annaSijainti() );
+				System.out.println( RobotinMaailma.annaNaapuri( suunta ) );
+				if ( (RobotinMaailma.annaNaapuri(suunta) == null) 
+						&& (RobotinMaailma.annaSijainti().voikoSuuntaanEdeta(suunta)) ) {
 					//eli jos naapuria ei tunneta (eli siellä ei ole käyty) 
 					//mutta sinne voi edetä, sen laskurin katsotaan olevan 0 
-
-
 					RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] = 0;
-
 				}
-
 				else {
 					RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] = RobotinMaailma
 							.annaNaapuri(suunta)
 							.annaLaskurinArvo();
 					//muutoin kysytään RobonMaailmalta ruudun laskurin arvo
 				}
-
-
 			}
 			else {
 				RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] = 5;
@@ -140,11 +40,7 @@ public class Algoritmi {
 		}
 		//palautetaan taulukko, jossa indeksi (0-3) 
 		//on ilmansuunta ja sen arvo on naapuriruudun laskurin arvo
-
-
 	}
-
-
 
 	public int annaNaapurienMaara(RobotinRuutu keskiRuutu) {
 		int naapurit = 0;
@@ -158,39 +54,28 @@ public class Algoritmi {
 	}
 
 	public boolean onkoRisteys(RobotinRuutu tamaruutu) {
-
 		if (annaNaapurienMaara(tamaruutu) > 2) {
 			return true;
 		}
 		else return false;
-
 		// käyttää naapurimäärälaskuria määrittäessään, 
 		// onko parametriruutu risteys
 		// risteys <=> yli 2 naapuria
 	}
 
 	public boolean onkoUmpikuja() {
-
 		/*muutos 28.10: käytetään taulukkoa suoraan ruudusta
 		 */
-
-
-
 		int suunnassaOnLiikaaKaynteja = 0;
-
 		for (int i = 0; i < 3; i++) {
-
 			if (RobotinMaailma.annaSijainti().naapurienLaskurit[i] >= 2) {
 				suunnassaOnLiikaaKaynteja++;
 			}
 		}
-
 		if (suunnassaOnLiikaaKaynteja == 3) {
 			return true;
 		}
-
 		else return false;
-
 		//ruutu on "umpikuja" jos tasan kolmen naapurin käyntilaskurit 2 tai 
 		//yli (seinät = 5)
 		//jos 4 naapurilla >=2, ollaan alussa, maalissa tai kusessa 
@@ -237,7 +122,6 @@ public class Algoritmi {
 		if (a >= 0) {
 			suunta = a;
 		}
-
 		else { 
 			a = haeArvo(RobotinMaailma
 					.annaSijainti()
@@ -246,31 +130,13 @@ public class Algoritmi {
 				suunta = a;
 			}
 		}
-
 		//^tämä siis palauttaa negatiivisen luvun jos se ei löydä mitään.
 		//0-arvoista suuntaa suositaan.
 		//Jos 0- tai 1- arvoisia ei löydy yhtäkään, ollaan maalissa tai kusessa.
-
 		if (onkoUmpikuja() == false
 				&& RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] == 1 
 				&& onkoRisteys(RobotinMaailma.annaNaapuri(suunta))) {
-
 			int uusiSuunta = arvoEriSuunta(suunta);
-
-			/**
-
-			jos ruutu jossa ollaan nyt EI ole umpikuja (kts. umpikujametodi)
-			JA
-			"suunta"-muuttujaan sijoitetussa suunnassa on ruutu joka on risteys 
-			JA
-			tuon risteyksen laskurin arvo on 1
-
-			-> arvotaan uusi suunta joka on eri kuin nykyinen.
-
-			kts. Tremaux:n algoritmin idea.
-
-			 */
-
 			if (! RobotinMaailma.annaSijainti().voikoSuuntaanEdeta( uusiSuunta )) {
 				teeSuuntaPaatos();
 			}
@@ -281,13 +147,8 @@ public class Algoritmi {
 				//^jos voi niin mennään sinne.
 			}
 		}
-
 		return suunta;
-
-
 	}
-
-
 
 	public static void main (String[] args) {
 		System.out.println("Testing more");

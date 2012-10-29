@@ -1,6 +1,9 @@
+import java.util.Arrays;
+
 public class RobotinRuutu {
 	
 	private int laskuri;
+	private boolean[] avoimetSuunnat = new boolean[4];
 	/** 
 	 * Attribuutteihin ainakin:
 	 *	- laskuri
@@ -11,7 +14,9 @@ public class RobotinRuutu {
 	
 	public int[] naapurienLaskurit = new int[4];
 	
-	
+	public RobotinRuutu() {
+		Arrays.fill( this.avoimetSuunnat, false );
+	}
 	
 	public int annaLaskurinArvo() {
 		return this.laskuri;
@@ -24,11 +29,11 @@ public class RobotinRuutu {
 	}
 	
 	public void asetaVoikoEdeta( int suunta, boolean voikoEdeta ) {
+		this.avoimetSuunnat[ suunta ] = voikoEdeta;
 		//tallentaa ruudun tietoihin, mihin suuntiin tästä ruudusta pääsee
 	}
 	
 	public boolean voikoSuuntaanEdeta( int suunta ) {
-		return false;
-		//palauttaa, voiko tästä ruudusta kulkea annettuun suuntaa
+		return this.avoimetSuunnat[ suunta ];
 	}
 }
