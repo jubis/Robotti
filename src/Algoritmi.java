@@ -4,6 +4,7 @@ public class Algoritmi {
 
 	private Random kone = new Random();
 	private Olo2Robotti robo = null;
+	private int	vanhaSuunta;
 
 	public Algoritmi( Olo2Robotti robo ) {
 		this.robo = robo;
@@ -17,6 +18,7 @@ public class Algoritmi {
 		for (suunta = 0; suunta < 4; suunta++) {
 
 			if (RobotinMaailma.annaSijainti().voikoSuuntaanEdeta(suunta)) {
+				System.out.println( this + " suuntaan " + suunta + " voi edetä" );
 				
 				System.out.println( RobotinMaailma.annaSijainti() );
 				System.out.println( RobotinMaailma.annaNaapuri( suunta ) );
@@ -27,9 +29,10 @@ public class Algoritmi {
 					RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] = 0;
 				}
 				else {
-					RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] = RobotinMaailma
-							.annaNaapuri(suunta)
-							.annaLaskurinArvo();
+					RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] = 
+										RobotinMaailma
+										.annaNaapuri(suunta)
+										.annaLaskurinArvo();
 					//muutoin kysytään RobonMaailmalta ruudun laskurin arvo
 				}
 			}
@@ -42,19 +45,20 @@ public class Algoritmi {
 		//on ilmansuunta ja sen arvo on naapuriruudun laskurin arvo
 	}
 
-	public int annaNaapurienMaara(RobotinRuutu keskiRuutu) {
-		int naapurit = 0;
-		for (int a = 0; a < 3; a++) { 
-			if (robo.voikoSuuntaanEdeta( a )) {
+	/*public int annaNaapurienMaara(RobotinRuutu keskiRuutu) {
+		return keskiRuutu.annaLaskurinArvo();
+		for (int a = 0; a < 4; a++) {
+			this.robo.kaannyVasemmalle();
+			if (this.robo.voiEdeta()) {
 				naapurit++;
 			}
 		}
 		return naapurit;
 		// metodi laskee ruudun etenemiskelpoisten naapurien määrän
-	}
+	}*/
 
-	public boolean onkoRisteys(RobotinRuutu tamaruutu) {
-		if (annaNaapurienMaara(tamaruutu) > 2) {
+	public boolean onkoRisteys(RobotinRuutu ruutu) {
+		if (ruutu.annaNaapurienMaara() > 2) {
 			return true;
 		}
 		else return false;
@@ -67,12 +71,13 @@ public class Algoritmi {
 		/*muutos 28.10: käytetään taulukkoa suoraan ruudusta
 		 */
 		int suunnassaOnLiikaaKaynteja = 0;
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 4; i++) {
 			if (RobotinMaailma.annaSijainti().naapurienLaskurit[i] >= 2) {
 				suunnassaOnLiikaaKaynteja++;
 			}
 		}
 		if (suunnassaOnLiikaaKaynteja == 3) {
+			System.out.println( this + " ollaan umpikujassa");
 			return true;
 		}
 		else return false;
@@ -87,11 +92,11 @@ public class Algoritmi {
 
 
 	public int arvoEriSuunta(int nytsuunta) {
-		int ulossuunta;
+		int ulossuunta = 0;// Math.abs( nytsuunta-2 ) ;
 		do {
 			ulossuunta = kone.nextInt(4);
 		} while(ulossuunta == nytsuunta);
-
+		
 		return ulossuunta;
 		//tämä metodi antaa suunnan, joka on eri kuin parametri. 
 	}
@@ -122,31 +127,47 @@ public class Algoritmi {
 		if (a >= 0) {
 			suunta = a;
 		}
-		else { 
+		else {
 			a = haeArvo(RobotinMaailma
 					.annaSijainti()
 					.naapurienLaskurit, 1); 
 			if (a >= 0) {
 				suunta = a;
 			}
+			System.out.println( "Ei löydy 0:llaa, suunta on " + suunta );
 		}
+		
+		/*if( onkoUmpikuja()  ) {
+			for( int i = 0; i < 4; i++ ) {
+				if( RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] ) {
+					
+				}
+			}
+		}*/
 		//^tämä siis palauttaa negatiivisen luvun jos se ei löydä mitään.
 		//0-arvoista suuntaa suositaan.
 		//Jos 0- tai 1- arvoisia ei löydy yhtäkään, ollaan maalissa tai kusessa.
-		if (onkoUmpikuja() == false
-				&& RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] == 1 
-				&& onkoRisteys(RobotinMaailma.annaNaapuri(suunta))) {
-			int uusiSuunta = arvoEriSuunta(suunta);
-			if (! RobotinMaailma.annaSijainti().voikoSuuntaanEdeta( uusiSuunta )) {
-				teeSuuntaPaatos();
-			}
+		if(onkoUmpikuja() == false
+				&& ( RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] % 2 ) == 1 
+				&& onkoRisteys(RobotinMaailma.annaNaapuri( suunta ) )) {
+			int uusiSuunta = 0;
+			do {
+				uusiSuunta = arvoEriSuunta(suunta);
+			} while (! RobotinMaailma.annaSijainti().voikoSuuntaanEdeta( uusiSuunta ));			
 			//^testataan vielä voiko uuteen suuntaan edetä, 
 			//jos ei niin kutsutaan tätä metodia uudestaan (rekursio)
-			else {
-				return uusiSuunta;
-				//^jos voi niin mennään sinne.
-			}
+			suunta = uusiSuunta;
+		} 
+		if( RobotinMaailma.annaSijainti().naapurienLaskurit[suunta] == 2
+			&& !onkoRisteys( RobotinMaailma.annaNaapuri( suunta ) )) {
+			int uusiSuunta = 0;
+			do {
+				uusiSuunta = arvoEriSuunta(suunta);
+			} while (! RobotinMaailma.annaSijainti().voikoSuuntaanEdeta( uusiSuunta ));	
+			suunta = uusiSuunta;
 		}
+		
+		this.vanhaSuunta = suunta;
 		return suunta;
 	}
 

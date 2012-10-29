@@ -36,4 +36,14 @@ public class RobotinRuutu {
 	public boolean voikoSuuntaanEdeta( int suunta ) {
 		return this.avoimetSuunnat[ suunta ];
 	}
+	
+	public int annaNaapurienMaara() {
+		int naapurit = 0;
+		for (int i = 0; i < 4; i++) {
+			if ( this.avoimetSuunnat[ i ] ) {
+				naapurit++;
+			}
+		}
+		return naapurit;
+	}
 }

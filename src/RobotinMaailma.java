@@ -14,7 +14,8 @@ public class RobotinMaailma {
 		RobotinMaailma.ruudut.get( nykyinenRuutu ).lisaaLaskuria();
 	}
 	
-	public static void siirry( int suunta ) {			
+	public static void siirry( int suunta ) {
+		System.out.println( RobotinMaailma.class + " siirry( "+ suunta +" ) " );
 		Point uusiRuutu = annaNaapuriPiste(suunta);
 		
 		if (!ruudut.containsKey(uusiRuutu)){
@@ -29,12 +30,19 @@ public class RobotinMaailma {
 	}
 	
 	public static RobotinRuutu annaSijainti() {
+		/*try {
+			
+			throw new RuntimeException();
+		} catch ( Exception e ) {
+			e.printStackTrace();
+		}*/
+		//System.out.println( RobotinMaailma.class + " nykyinen ruutu: " + nykyinenRuutu );
 		return ruudut.get(nykyinenRuutu);
 		//palauttaa nykyisen ruudun
 	}
 	
 	public static Point annaNaapuriPiste (int suunta) {
-		Point naapuri = nykyinenRuutu;
+		Point naapuri = (Point)nykyinenRuutu.clone();
 		switch(suunta){
 		case Olo2Robotti.POHJOINEN:
 			naapuri.translate(0, 1);

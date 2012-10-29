@@ -27,8 +27,29 @@ public class Olo2Robotti extends Robotti {
 			this.kaannyOikealle();	
 		}
 	}
+	
+	public boolean onkoUmpikuja() {
+		int naapurit = 0;
+		for( int i = 0; i < 4; i++ ) {
+			this.kaannyOikealle();
+			if( this.voiEdeta() && 
+				RobotinMaailma.annaSijainti().naapurienLaskurit[ this.annaSuunta() ] < 2 ) {
+				naapurit++;
+			}
+		}
+		if( naapurit > 1 ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	public void teeSiirto() {
+		if( this.onkoUmpikuja() ) {
+			System.out.println("Ollaan umpikujassa -> lisää laskuria");
+			RobotinMaailma.annaSijainti().lisaaLaskuria();
+		}
+		
 		this.pyorahda();
 		alg.tutkaile();
 		int suunta = alg.teeSuuntaPaatos();
@@ -40,7 +61,7 @@ public class Olo2Robotti extends Robotti {
 		
 		RobotinMaailma.siirry( suunta );
 		
-		System.out.println( this + " etenee suuntaan: " + this.annaSuunta() );
+		System.out.println( this + " etenee suuntaan: " + this.annaSuunta() + "*************" );
 		this.etene();
 	}
 
